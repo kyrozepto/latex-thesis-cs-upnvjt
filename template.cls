@@ -1,5 +1,4 @@
-% template-2.cls -- UPN Veteran Jawa Timur Skripsi Template (2026)
-% Updated to support the official cover layout with yellow rule and UPN logo
+% template.cls -- UPN Veteran Jawa Timur Thesis Template (2026)
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{template}[2026/01/01 UPN Veteran Jatim Skripsi Template v2]
 \LoadClass[12pt,a4paper,oneside]{report}
@@ -70,6 +69,9 @@
 \renewcommand{\thesection}{\arabic{chapter}.\arabic{section}.}
 \renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
 \renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
+\renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}
+\renewcommand{\thefigure}{\arabic{chapter}. \arabic{figure}}
+\renewcommand{\thetable}{\arabic{chapter}. \arabic{table}}
 
 \titleformat{\chapter}[display]
   {\normalfont\normalsize\bfseries\centering}
@@ -116,13 +118,7 @@
 }
 
 % ── Rename standard nomenclature
-\AtBeginDocument{%
-  % \renewcommand{\figurename}{Figure}
-  % \renewcommand{\tablename}{Table}
-  % \renewcommand{\contentsname}{TABLE OF CONTENTS}
-  % \renewcommand{\listfigurename}{LIST OF FIGURES}
-  % \renewcommand{\listtablename}{LIST OF TABLES}
-  % \renewcommand{\bibname}{BIBLIOGRAPHY}
+\AtBeginDocument{
   \renewcommand{\figurename}{Gambar}
   \renewcommand{\tablename}{Tabel}
   \renewcommand{\contentsname}{DAFTAR ISI}
@@ -155,9 +151,34 @@
 
 % ── Menambahkan Titik-titik (Dotted Leaders) pada Semua Daftar
 \RequirePackage{tocloft}
-\renewcommand{\cftchapleader}{\cftdotfill{4}} % Mengunci jarak titik bab jadi 4
-\renewcommand{\cftfigleader}{\cftdotfill{4}}  % Mengunci jarak titik gambar jadi 4
-\renewcommand{\cfttableader}{\cftdotfill{4}}  % Mengunci jarak titik tabel jadi 4
+\newcommand{\ThesisDotSep}{0.8}
+\renewcommand{\cftchapleader}{\cftdotfill{\ThesisDotSep}}
+\renewcommand{\cftfigleader}{\cftdotfill{\ThesisDotSep}}
+\renewcommand{\cfttableader}{\cftdotfill{\ThesisDotSep}}
+\renewcommand{\cftfigpresnum}{\figurename\ }
+\renewcommand{\cftfigaftersnum}{\ }
+\renewcommand{\cfttabpresnum}{\tablename\ }
+\renewcommand{\cfttabaftersnum}{\ }
+\setlength{\cftfignumwidth}{5.8em}
+\setlength{\cfttabnumwidth}{5.2em}
+
+\makeatletter
+\@ifpackageloaded{algorithm2e}{%
+  \@addtoreset{algocf}{chapter}%
+  \renewcommand{\thealgocf}{\arabic{chapter}. \arabic{algocf}}%
+  \renewcommand{\@dotsep}{\ThesisDotSep}%
+  \renewcommand*{\l@algocf}{\@dottedtocline{1}{0pt}{8.6em}}%
+}{%
+  \AtBeginDocument{%
+    \@ifpackageloaded{algorithm2e}{%
+      \@addtoreset{algocf}{chapter}%
+      \renewcommand{\thealgocf}{\arabic{chapter}. \arabic{algocf}}%
+      \renewcommand{\@dotsep}{\ThesisDotSep}%
+      \renewcommand*{\l@algocf}{\@dottedtocline{1}{0pt}{8.6em}}%
+    }{}%
+  }%
+}
+\makeatother
 % ── Pusatkan judul Daftar Isi, Daftar Gambar, Daftar Tabel
 \renewcommand{\cfttoctitlefont}{\hfill\normalfont\normalsize\bfseries}
 \renewcommand{\cftaftertoctitle}{\hfill}
@@ -185,8 +206,7 @@
   \thispagestyle{empty}%
   \vspace*{\fill}%
   \begin{center}
-    % \textit{This page is intentionally left blank}
-    \textit{Halaman ini sengaja dikosongkan}
+    \textit{\Lang{Halaman ini sengaja dikosongkan}{This page is intentionally left blank}}
   \end{center}%
   \vspace*{\fill}%
   \clearpage

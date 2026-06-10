@@ -1,0 +1,87 @@
+% config/thesis-language.tex
+% -----------------------------------------------------------------------------
+% LANGUAGE SWITCHING HELPERS
+% -----------------------------------------------------------------------------
+% This file converts \ThesisLanguage from config/thesis-config.tex into labels.
+% Most students only need to edit \ThesisLanguage, not this file.
+
+\RequirePackage{ifthen}
+
+\newif\ifthesisenglish
+\ifthenelse{\equal{\ThesisLanguage}{english}}{\thesisenglishtrue}{\thesisenglishfalse}
+
+\newif\ifthesisdoctype
+\ifthenelse{\equal{\ThesisDocumentType}{tesis}}{\thesisdoctypetrue}{\thesisdoctypefalse}
+
+% Choose Indonesian text if \ThesisLanguage is indonesian, English text if english.
+\newcommand{\Lang}[2]{\ifthesisenglish #2\else #1\fi}
+
+% Derived metadata helpers.
+\newcommand{\ThesisTitle}{\Lang{\ThesisTitleID}{\ThesisTitleEN}}
+\newcommand{\ThesisTitleUpper}{\MakeUppercase{\ThesisTitle}}
+\newcommand{\StudentNameUpper}{\MakeUppercase{\StudentName}}
+\newcommand{\DefenseDate}{\Lang{\DefenseDateID}{\DefenseDateEN}}
+\newcommand{\StudyProgramName}{\Lang{\ProgramNameID}{\ProgramNameEN}}
+\newcommand{\StudyProgramPhrase}{\Lang{Program Studi \ProgramNameID}{\ProgramNameEN\ Study Program}}
+\newcommand{\DocTypeNameID}{\ifthesisdoctype Tesis\else Skripsi\fi}
+\newcommand{\DocTypeNameEN}{\ifthesisdoctype Thesis\else Undergraduate Thesis\fi}
+\newcommand{\DocTypeNameLowerID}{\ifthesisdoctype tesis\else skripsi\fi}
+\newcommand{\DocTypeNameLowerEN}{\ifthesisdoctype thesis\else undergraduate thesis\fi}
+\newcommand{\DocTypeName}{\Lang{\DocTypeNameID}{\DocTypeNameEN}}
+\newcommand{\DocTypeNameLower}{\Lang{\DocTypeNameLowerID}{\DocTypeNameLowerEN}}
+
+% Document labels
+\newcommand{\DocTypeLabel}{\DocTypeName}
+\newcommand{\AdvisorBlockLabel}{\Lang{DOSEN PEMBIMBING}{ADVISORS}}
+\newcommand{\MinistryLabel}{\Lang{KEMENTERIAN PENDIDIKAN TINGGI, SAINS, DAN TEKNOLOGI}{MINISTRY OF HIGHER EDUCATION, SCIENCE, AND TECHNOLOGY}}
+\newcommand{\UniversityLabel}{\Lang{UNIVERSITAS PEMBANGUNAN NASIONAL VETERAN JAWA TIMUR}{UNIVERSITAS PEMBANGUNAN NASIONAL VETERAN JAWA TIMUR}}
+\newcommand{\FacultyLabel}{\Lang{Fakultas Ilmu Komputer}{Faculty of Computer Science}}
+\newcommand{\ProgramLabel}{\MakeUppercase{\StudyProgramPhrase}}
+\newcommand{\ApprovalSheetLabel}{\Lang{LEMBAR PENGESAHAN}{APPROVAL SHEET}}
+\newcommand{\AcceptanceSheetLabel}{\Lang{LEMBAR PERSETUJUAN}{APPROVAL SHEET}}
+\newcommand{\PlagiarismStatementLabel}{\Lang{SURAT PERNYATAAN BEBAS PLAGIASI}{STATEMENT OF ORIGINALITY}}
+\newcommand{\PrefaceLabel}{\Lang{KATA PENGANTAR}{ACKNOWLEDGEMENTS}}
+\newcommand{\AbbreviationListLabel}{\Lang{DAFTAR SINGKATAN}{LIST OF ABBREVIATIONS}}
+\newcommand{\AppendixLabel}{\Lang{LAMPIRAN}{APPENDIX}}
+\newcommand{\BibliographyLabel}{\Lang{DAFTAR PUSTAKA}{BIBLIOGRAPHY}}
+\newcommand{\ChapterPrefix}{\Lang{BAB}{CHAPTER}}
+\newcommand{\ContentsPrefix}{\Lang{BAB }{CHAPTER }}
+\newcommand{\NpmLabel}{\Lang{NPM}{NPM}}
+\newcommand{\ByLabel}{\Lang{Oleh}{By}}
+\newcommand{\AdvisorOneRole}{\Lang{Pembimbing I}{Advisor I}}
+\newcommand{\AdvisorTwoRole}{\Lang{Pembimbing II}{Advisor II}}
+\newcommand{\ExaminerOneRole}{\Lang{Ketua Penguji}{Head Assessor}}
+\newcommand{\ExaminerTwoRole}{\Lang{Anggota Penguji}{Assessor I}}
+\newcommand{\AgreeLabel}{\Lang{Menyetujui,}{Approved by,}}
+\newcommand{\KnowLabel}{\Lang{Mengetahui,}{Acknowledged by,}}
+\newcommand{\DeanRoleLabel}{\Lang{Dekan Fakultas Ilmu Komputer}{Dean of the Faculty of Computer Science}}
+\newcommand{\HeadProgramRoleLabel}{\Lang{Koordinator \StudyProgramPhrase}{Coordinator of \StudyProgramPhrase}}
+\newcommand{\StudentNameLabel}{\Lang{Nama Mahasiswa}{Student Name}}
+\newcommand{\ThesisTitleLabel}{\Lang{Judul \DocTypeName}{Thesis Title}}
+\newcommand{\ProgramDegreeLabel}{\Lang{Sarjana (S1)}{Bachelor (S1)}}
+\newcommand{\DegreeRequirement}{\Lang{\DocTypeName\ ini disusun sebagai salah satu syarat untuk memperoleh gelar Sarjana Komputer pada \StudyProgramPhrase\ Fakultas Ilmu Komputer Universitas Pembangunan Nasional Veteran Jawa Timur.}{This \DocTypeNameLower\ is prepared as one of the requirements for obtaining the Bachelor of Computer Science degree at the \StudyProgramPhrase, Faculty of Computer Science, Universitas Pembangunan Nasional Veteran Jawa Timur.}}
+
+
+% Standard LaTeX names yang disesuaikan dengan dokumen asli
+\AtBeginDocument{%
+  \renewcommand{\figurename}{\Lang{Gambar}{Figure}}%
+  \renewcommand{\tablename}{\Lang{Tabel}{Table}}%
+  \renewcommand{\contentsname}{\Lang{DAFTAR ISI}{TABLE OF CONTENTS}}%
+  \renewcommand{\listfigurename}{\Lang{DAFTAR GAMBAR}{LIST OF FIGURES}}%
+  \renewcommand{\listtablename}{\Lang{DAFTAR TABEL}{LIST OF TABLES}}%
+  \renewcommand{\bibname}{\BibliographyLabel}%
+  \renewcommand{\lstlistingname}{\Lang{Kode Program}{Code Program}}%
+  \renewcommand{\lstlistlistingname}{\Lang{DAFTAR KODE}{LIST OF CODE}}%
+  \renewcommand{\algorithmcfname}{\Lang{Kode Program}{Code Program}}%
+  \renewcommand{\listalgorithmcfname}{\Lang{DAFTAR KODE}{LIST OF CODE}}%
+}
+
+% Reusable heading format for main chapters.
+\newcommand{\ApplyMainChapterStyle}{%
+  \titleformat{\chapter}[display]
+    {\normalfont\normalsize\bfseries\centering}
+    {\ChapterPrefix\ \thechapter}
+    {0pt}
+    {\MakeUppercase}%
+  \titlespacing*{\chapter}{0pt}{0pt}{12pt}%
+}

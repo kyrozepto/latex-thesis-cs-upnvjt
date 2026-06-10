@@ -1,5 +1,5 @@
-% main.tex -- Template Skripsi UPN "Veteran" Jawa Timur
-% Compile with: pdflatex -interaction=nonstopmode main.tex (twice), then bibtex if citations are used.
+% main.tex -- Template Skripsi/Thesis Fasilkom UPN "Veteran" Jawa Timur
+% Compile: pdflatex -> bibtex -> pdflatex -> pdflatex
 \documentclass{template}
 
 \usepackage{amsmath,amsfonts}
@@ -14,396 +14,217 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{helvet}
 \graphicspath{{figures/}}
-\renewcommand{\lstlistingname}{Kode}
-\renewcommand{\lstlistlistingname}{DAFTAR KODE}
-\renewcommand{\algorithmcfname}{Algoritma}
-\renewcommand{\listalgorithmcfname}{DAFTAR ALGORITMA}
-\SetKwInput{KwInput}{Masukan}
-\SetKwInput{KwOutput}{Keluaran}
-\SetKw{KwReturn}{Kembalikan}
-\lstset{
-  basicstyle=\ttfamily\small,
-  breaklines=true,
-  frame=single,
-  columns=fullflexible,
-  keywordstyle=\bfseries,
-  captionpos=b
-}
 
-% ── Metadata Skripsi ─────────────────────────────────────────────────────────
-% Ganti nilai di bawah ini untuk setiap mahasiswa. Pertahankan nama dekan dan
-% koordinator program studi hanya jika masih sesuai dengan ketentuan fakultas terbaru.
-\newcommand{\ThesisTitleID}{Judul Skripsi Bahasa Indonesia Ditulis dengan Huruf Kapital di Setiap Awal Kata}
-\newcommand{\ThesisTitleIDUpper}{JUDUL SKRIPSI BAHASA INDONESIA DITULIS DENGAN HURUF KAPITAL DI SETIAP AWAL KATA}
-\newcommand{\ThesisTitle}{English Thesis Title Written in Title Case}
-\newcommand{\ThesisTitleUpper}{ENGLISH THESIS TITLE WRITTEN IN TITLE CASE}
+\makeatletter
+\@addtoreset{algocf}{chapter}
+\renewcommand{\thealgocf}{\arabic{chapter}. \arabic{algocf}}
+\makeatother
 
-\newcommand{\StudentName}{Nama Lengkap Mahasiswa}
-\newcommand{\StudentNameUpper}{NAMA LENGKAP MAHASISWA}
-\newcommand{\StudentID}{Nomor Pokok Mahasiswa}
-\newcommand{\AdvisorOne}{Nama Dosen Pembimbing I, Gelar}
-\newcommand{\AdvisorOneID}{NIP/NPT. \makebox[4cm]{\dotfill}}
-\newcommand{\AdvisorTwo}{Nama Dosen Pembimbing II, Gelar}
-\newcommand{\AdvisorTwoID}{NIP/NPT. \makebox[4cm]{\dotfill}}
-\newcommand{\ExaminerOne}{Nama Ketua Penguji, Gelar}
-\newcommand{\ExaminerOneID}{NIP/NPT. \makebox[4cm]{\dotfill}}
-\newcommand{\ExaminerTwo}{Nama Anggota Penguji, Gelar}
-\newcommand{\ExaminerTwoID}{NIP/NPT. \makebox[4cm]{\dotfill}}
-\newcommand{\DeanName}{Prof. Dr. Ir. Novirina Hendrasarie, M.T.}
-\newcommand{\DeanID}{NIP. 19681126 199403 2 001}
-\newcommand{\HeadOfProgramName}{Dr. Intan Yuniar Purbasari, S.Kom., M.Sc.}
-\newcommand{\HeadOfProgramID}{NIP. 19800602 202521 2 029}
-\newcommand{\DefenseDate}{Tanggal Bulan Tahun}
-\newcommand{\SubmissionYear}{Tahun}
-\newcommand{\KeywordsID}{kata kunci pertama, kata kunci kedua, kata kunci ketiga}
-\newcommand{\KeywordsEN}{first keyword, second keyword, third keyword}
+\input{config/thesis-config}
+\input{config/thesis-language}
 
-% Kotak bantuan untuk template. Hapus semua \TemplateTip dan \TemplateTodo sebelum naskah final dikumpulkan.
-\newcommand{\TemplateTip}[1]{\par\noindent\fbox{\begin{minipage}{0.94\linewidth}\textbf{Tips penulisan:} #1\end{minipage}}\par\vspace{0.4em}}
-\newcommand{\TemplateTodo}[1]{\par\noindent\fbox{\begin{minipage}{0.94\linewidth}\textbf{Isi bagian ini:} #1\end{minipage}}\par\vspace{0.4em}}
+\SetKwInput{KwInput}{\Lang{Masukan}{Input}}
+\SetKwInput{KwOutput}{\Lang{Keluaran}{Output}}
+\SetKw{KwReturn}{\Lang{Kembalikan}{Return}}
+\lstset{basicstyle=\ttfamily\small,breaklines=true,frame=single,columns=fullflexible,keywordstyle=\bfseries,captionpos=b}
+
+% Template helper boxes. Remove all \TemplateTip and \TemplateTodo before final submission.
+\newcommand{\TemplateTip}[1]{\par\noindent\fbox{\begin{minipage}{0.94\linewidth}\textbf{\Lang{Tips penulisan:}{Writing tip:}} #1\end{minipage}}\par\vspace{0.4em}}
+\newcommand{\TemplateTodo}[1]{\par\noindent\fbox{\begin{minipage}{0.94\linewidth}\textbf{\Lang{Isi bagian ini:}{Complete this section:}} #1\end{minipage}}\par\vspace{0.4em}}
 
 \begin{document}
-
-% ============================================================
-% BAGIAN AWAL
-% ============================================================
 \frontmattergeometry
 \pagenumbering{roman}
 \setcounter{page}{2}
 
 % ------------------------------------------------------------
-% HALAMAN JUDUL
+% COVER
 % ------------------------------------------------------------
 \begin{titlepage}
-  \renewcommand{\familydefault}{\sfdefault}
-  \sffamily
+  \renewcommand{\familydefault}{\sfdefault}\sffamily
   \thispagestyle{empty}
-
   \begin{flushleft}
-    \noindent\hspace*{-\dimexpr\oddsidemargin+0.2cm\relax}%
-    \includegraphics[width=4cm]{logo_upn.png}
+    \noindent\hspace*{-\dimexpr\oddsidemargin+0.2cm\relax}\includegraphics[width=4cm]{logo_upn.png}
   \end{flushleft}
-
   \vspace{0.35cm}
-    \noindent\hspace*{-\dimexpr\oddsidemargin+1in\relax}%
-    {\color{coverYellow}\rule{\paperwidth}{18pt}}
+  \noindent\hspace*{-\dimexpr\oddsidemargin+1in\relax}{\color{coverYellow}\rule{\paperwidth}{18pt}}
   \vspace{0.45cm}
-
-  \begin{flushleft}
-    {\large\bfseries SKRIPSI\par}
-  \end{flushleft}
-
+  \begin{flushleft}{\large\bfseries \MakeUppercase{\DocTypeLabel}\par}\end{flushleft}
   \vspace{0.2cm}
-
-  \begin{flushleft}
-    {\Large\bfseries \ThesisTitleIDUpper\par}
-  \end{flushleft}
-
+  \begin{flushleft}{\Large\bfseries \ThesisTitleUpper\par}\end{flushleft}
   \vspace{1.2cm}
-
   \begin{flushleft}
     {\large\bfseries \StudentNameUpper\par}
-    {\large NPM \StudentID\par}
+    {\large \NpmLabel\ \StudentID\par}
   \end{flushleft}
-
   \vspace{1.2cm}
-
   \begin{flushleft}
-    {\large\bfseries DOSEN PEMBIMBING\par}
+    {\large\bfseries \AdvisorBlockLabel\par}
     {\large \AdvisorOne\par}
     {\large \AdvisorTwo\par}
   \end{flushleft}
-
   \vspace{1.2cm}
-
   \begin{flushleft}
-    {\normalsize\bfseries KEMENTERIAN PENDIDIKAN TINGGI, SAINS, DAN TEKNOLOGI\par}
-    {\normalsize\bfseries UNIVERSITAS PEMBANGUNAN NASIONAL VETERAN JAWA TIMUR\par}
-    {\normalsize\bfseries FAKULTAS ILMU KOMPUTER\par}
-    {\normalsize\bfseries PROGRAM STUDI INFORMATIKA\par}
+    {\normalsize\bfseries \MinistryLabel\par}
+    {\normalsize\bfseries \UniversityLabel\par}
+    {\normalsize\bfseries \MakeUppercase{\FacultyLabel}\par}
+    {\normalsize\bfseries \ProgramLabel\par}
     {\normalsize\bfseries SURABAYA\par}
     {\normalsize\bfseries \SubmissionYear\par}
   \end{flushleft}
-
 \end{titlepage}
 
 \halamanKosong
 
-% ------------------------------------------------------------
-% LEMBAR PENGESAHAN
-% ------------------------------------------------------------
-\chapter*{LEMBAR PENGESAHAN}
-\addcontentsline{toc}{chapter}{LEMBAR PENGESAHAN}
+\chapter*{\ApprovalSheetLabel}
+\addcontentsline{toc}{chapter}{\ApprovalSheetLabel}
 \vspace{0.8cm}
-
-\begin{center}
-{\bfseries\normalsize \ThesisTitleIDUpper\par}
-\end{center}
-
+\begin{center}{\bfseries\normalsize \ThesisTitleUpper\par}\end{center}
 \vspace{0.2cm}
-
-\begin{center}
-    \noindent Oleh:\\
-    \StudentNameUpper\\
-    NPM. \StudentID
-\end{center}
-
+\begin{center}\ByLabel:\\ \StudentNameUpper\\ \NpmLabel. \StudentID\end{center}
 \vspace{0.5cm}
-\noindent Telah dipertahankan di hadapan dan diterima oleh Tim Penguji Skripsi Program Studi Informatika Fakultas Ilmu Komputer Universitas Pembangunan Nasional Veteran Jawa Timur pada tanggal \DefenseDate.
-
+\noindent \Lang{Telah dipertahankan di hadapan dan diterima oleh Tim Penguji \DocTypeName\ \StudyProgramPhrase\ Fakultas Ilmu Komputer Universitas Pembangunan Nasional Veteran Jawa Timur pada tanggal \DefenseDate.}{This \DocTypeNameLower\ has been defended before and accepted by the \DocTypeName\ Examination Committee of the \StudyProgramPhrase, Faculty of Computer Science, Universitas Pembangunan Nasional Veteran Jawa Timur on \DefenseDate.}
 \vspace{0.2cm}
-\begin{center}\bfseries Menyetujui,\end{center}
-
+\begin{center}\bfseries \AgreeLabel\end{center}
 \vspace{0.2cm}
-\noindent
-\begin{tabular}{@{}p{0.67\linewidth} p{0.15\linewidth} p{0.25\linewidth}@{}}
-\textbf{\underline{\AdvisorOne}} & \underline{\makebox[\linewidth]{\dotfill}} & \textbf{(Pembimbing I)} \\
+\noindent\begin{tabular}{@{}p{0.67\linewidth} p{0.15\linewidth} p{0.25\linewidth}@{}}
+\textbf{\underline{\AdvisorOne}} & \underline{\makebox[\linewidth]{\dotfill}} & \textbf{(\AdvisorOneRole)} \\
 \AdvisorOneID & & \\[0.5cm]
-\textbf{\underline{\AdvisorTwo}} & \underline{\makebox[\linewidth]{\dotfill}} & \textbf{(Pembimbing II)} \\
+\textbf{\underline{\AdvisorTwo}} & \underline{\makebox[\linewidth]{\dotfill}} & \textbf{(\AdvisorTwoRole)} \\
 \AdvisorTwoID & & \\[0.5cm]
-\textbf{\underline{\ExaminerOne}} & \underline{\makebox[\linewidth]{\dotfill}} & \textbf{(Ketua Penguji)} \\
+\textbf{\underline{\ExaminerOne}} & \underline{\makebox[\linewidth]{\dotfill}} & \textbf{(\ExaminerOneRole)} \\
 \ExaminerOneID & & \\[0.5cm]
-\textbf{\underline{\ExaminerTwo}} & \underline{\makebox[\linewidth]{\dotfill}} & \textbf{(Anggota Penguji)} \\
+\textbf{\underline{\ExaminerTwo}} & \underline{\makebox[\linewidth]{\dotfill}} & \textbf{(\ExaminerTwoRole)} \\
 \ExaminerTwoID & & \\
 \end{tabular}
-
 \vspace{0.8cm}
-\begin{center}
-\begin{tabular}{@{}c@{}}
-\bfseries Mengetahui,\\
-\bfseries Dekan Fakultas Ilmu Komputer\\[2cm]
-\bfseries {\underline{\DeanName}}\\
-\DeanID
-\end{tabular}
-\end{center}
+\begin{center}\begin{tabular}{@{}c@{}}\bfseries \KnowLabel\\\bfseries \DeanRoleLabel\\[2cm]\bfseries {\underline{\DeanName}}\\\DeanID\end{tabular}\end{center}
 
 \halamanKosong
 
-% ------------------------------------------------------------
-% LEMBAR PERSETUJUAN
-% ------------------------------------------------------------
-\chapter*{LEMBAR PERSETUJUAN}
-\addcontentsline{toc}{chapter}{LEMBAR PERSETUJUAN}
+\chapter*{\AcceptanceSheetLabel}
+\addcontentsline{toc}{chapter}{\AcceptanceSheetLabel}
 \BgThispage
 \vspace{1cm}
-
-\begin{center}
-{\bfseries\normalsize \ThesisTitleIDUpper\par}
-\end{center}
-
+\begin{center}{\bfseries\normalsize \ThesisTitleUpper\par}\end{center}
 \vspace{0.2cm}
-
-\begin{center}
-    \noindent Oleh:\\
-    \StudentNameUpper\\
-    NPM. \StudentID
-\end{center}
-
+\begin{center}\ByLabel:\\ \StudentNameUpper\\ \NpmLabel. \StudentID\end{center}
 \vspace{7.5cm}
-
-\begin{center}
-\begin{tabular}{@{}c@{}}
-\bfseries Menyetujui,\\
-\bfseries Koordinator Program Studi Informatika\\
-\bfseries Fakultas Ilmu Komputer\\[2cm]
-\bfseries {\underline{\HeadOfProgramName}}\\
-\HeadOfProgramID
-\end{tabular}
-\end{center}
+\begin{center}\begin{tabular}{@{}c@{}}\bfseries \AgreeLabel\\\bfseries \HeadProgramRoleLabel\\\bfseries \FacultyLabel\\[2cm]\bfseries {\underline{\HeadOfProgramName}}\\\HeadOfProgramID\end{tabular}\end{center}
 
 \halamanKosong
 
-% ------------------------------------------------------------
-% SURAT PERNYATAAN BEBAS PLAGIASI
-% ------------------------------------------------------------
-\chapter*{SURAT PERNYATAAN BEBAS PLAGIASI}
-\addcontentsline{toc}{chapter}{SURAT PERNYATAAN BEBAS PLAGIASI}
-
+\chapter*{\PlagiarismStatementLabel}
+\addcontentsline{toc}{chapter}{\PlagiarismStatementLabel}
 \vspace{0.5cm}
-
-\noindent Yang bertanda tangan di bawah ini:
-
+\noindent \Lang{Yang bertanda tangan di bawah ini:}{The undersigned:}\par
 \vspace{0.3cm}
-
 \begin{tabular}{@{} l c l @{}}
-Nama Mahasiswa & : & \StudentName \\
-NPM            & : & \StudentID \\
-Program        & : & Sarjana (S1) \\
-Program Studi  & : & Informatika \\
-Fakultas       & : & Ilmu Komputer \\
+\StudentNameLabel & : & \StudentName \\
+\NpmLabel         & : & \StudentID \\
+\Lang{Program}{Program} & : & \ProgramDegreeLabel \\
+\Lang{Program Studi}{Study Program} & : & \StudyProgramName \\
+\Lang{Fakultas}{Faculty} & : & \Lang{Ilmu Komputer}{Computer Science} \\
 \end{tabular}
+\vspace{0.5cm}
+
+\noindent \Lang{Menyatakan bahwa dalam dokumen ilmiah \DocTypeName\ ini tidak terdapat bagian dari karya ilmiah lain yang telah diajukan untuk memperoleh gelar akademik di suatu lembaga pendidikan tinggi, dan juga tidak terdapat karya atau pendapat yang pernah ditulis atau diterbitkan oleh orang/lembaga lain, kecuali yang secara tertulis disitasi dalam dokumen ini dan disebutkan secara lengkap dalam daftar pustaka.}{Declare that this \DocTypeNameLower\ does not contain parts of another scientific work submitted to obtain an academic degree at any higher education institution, nor does it contain work or opinions written or published by other persons/institutions, except those properly cited and listed in the bibliography.}
 
 \vspace{0.5cm}
-\noindent Menyatakan bahwa dalam dokumen ilmiah Skripsi ini tidak terdapat bagian dari karya ilmiah lain yang telah diajukan untuk memperoleh gelar akademik di suatu lembaga pendidikan tinggi, dan juga tidak terdapat karya atau pendapat yang pernah ditulis atau diterbitkan oleh orang/lembaga lain, kecuali yang secara tertulis disitasi dalam dokumen ini dan disebutkan secara lengkap dalam daftar pustaka.
-
-\vspace{0.5cm}
-\noindent Dan saya menyatakan bahwa dokumen ilmiah ini bebas dari unsur-unsur plagiasi. Apabila di kemudian hari ditemukan indikasi plagiat pada Skripsi ini, saya bersedia menerima sanksi sesuai dengan peraturan perundang-undangan yang berlaku.
-
-\vspace{0.5cm}
-\noindent Demikian surat pernyataan ini saya buat dengan sesungguhnya tanpa ada paksaan dari siapa pun juga dan untuk dipergunakan sebagaimana mestinya.
-
+\noindent \Lang{Demikian surat pernyataan ini saya buat dengan sesungguhnya tanpa ada paksaan dari siapa pun juga dan untuk dipergunakan sebagaimana mestinya.}{This statement is made truthfully and without coercion for appropriate use.}
 \vspace{1cm}
-\begin{flushright}
-Surabaya, \DefenseDate\\[0.3cm]
-Yang Membuat Pernyataan,\\[2.5cm]
-{\underline \StudentName}\\
-NPM. \StudentID
-\end{flushright}
+\begin{flushright}\Lang{Surabaya}{Surabaya}, \DefenseDate\\[0.3cm]\Lang{Yang Membuat Pernyataan,}{Declarant,}\\[2.5cm]{\underline \StudentName}\\\NpmLabel. \StudentID\end{flushright}
 
 \halamanKosong
 
-% ------------------------------------------------------------
-% ABSTRAK
-% ------------------------------------------------------------
-\chapter*{ABSTRAK}
-\addcontentsline{toc}{chapter}{ABSTRAK}
-
-\noindent
-\begin{tabular}{@{} l c p{0.60\linewidth} @{}}
-Nama Mahasiswa / NPM & : & \StudentName\ / \StudentID \\
-Judul Skripsi        & : & \ThesisTitleID \\
-Dosen Pembimbing     & : & 1. \AdvisorOne \\
-                     &   & 2. \AdvisorTwo \\
+\chapter*{\Lang{ABSTRAK}{ABSTRACT}}
+\addcontentsline{toc}{chapter}{\Lang{ABSTRAK}{ABSTRACT}}
+\noindent\begin{tabular}{@{} l c p{0.60\linewidth} @{}}
+\StudentNameLabel\ / \NpmLabel & : & \StudentName\ / \StudentID \\
+\ThesisTitleLabel & : & \ThesisTitle \\
+\Lang{Dosen Pembimbing}{Advisor} & : & 1. \AdvisorOne \\
+ & & 2. \AdvisorTwo \\
 \end{tabular}
-
 \vspace{0.5cm}
-\TemplateTodo{Tulis abstrak bahasa Indonesia dalam satu sampai tiga paragraf ringkas. Jelaskan latar belakang masalah, tujuan penelitian, metode utama, data atau objek penelitian, hasil terpenting, dan kesimpulan. Hindari sitasi, tabel, gambar, dan klaim yang belum dibuktikan.}
-
-\noindent Paragraf abstrak pertama memuat konteks dan masalah utama penelitian. Paragraf berikutnya menjelaskan pendekatan penelitian dan hasil paling penting secara singkat. Paragraf terakhir dapat menegaskan kontribusi dan implikasi penelitian sesuai bukti yang tersedia.
-
+\TemplateTodo{\Lang{Tulis abstrak sesuai bahasa dokumen. Jika dokumen berbahasa Indonesia, bagian ini menjadi ABSTRAK. Jika \texttt{\textbackslash ThesisLanguage} diubah ke \texttt{english}, bagian ini otomatis menjadi ABSTRACT.}{Write the abstract in the selected document language. When \texttt{\textbackslash ThesisLanguage} is set to \texttt{english}, labels and guidance become English.}}
+\noindent \Lang{Paragraf abstrak memuat konteks, tujuan, metode, data atau objek penelitian, hasil utama, dan kesimpulan. Hindari sitasi dan klaim yang belum dibuktikan.}{The abstract summarizes the context, objective, method, data or research object, main findings, and conclusion. Avoid citations and unsupported claims.}
 \vspace{0.5cm}
-\noindent {\bfseries Kata Kunci}: \KeywordsID
+
+\noindent {\bfseries \Lang{Kata Kunci}{Keywords}}: \Lang{\KeywordsID}{\KeywordsEN}
 
 \halamanKosong
 
-% ------------------------------------------------------------
-% ABSTRACT
-% ------------------------------------------------------------
-\chapter*{ABSTRACT}
-\addcontentsline{toc}{chapter}{ABSTRACT}
+\chapter*{\PrefaceLabel}
+\addcontentsline{toc}{chapter}{\PrefaceLabel}
+\Lang{Puji syukur kehadirat Tuhan Yang Maha Esa atas segala rahmat dan hidayah-Nya sehingga penulis dapat menyelesaikan \DocTypeLabel\ dengan judul \textbf{``\ThesisTitle''}. \DegreeRequirement}{The author expresses gratitude to God Almighty for the completion of this \DocTypeLabel\ entitled \textbf{``\ThesisTitle''}. \DegreeRequirement}
 
-\noindent
-\begin{tabular}{@{} l c p{0.60\linewidth} @{}}
-Student Name / NPM & : & \StudentName\ / \StudentID \\
-Thesis Title       & : & \ThesisTitle \\
-Advisor            & : & 1. \AdvisorOne \\
-                   &   & 2. \AdvisorTwo \\
-\end{tabular}
-
-\vspace{0.5cm}
-\TemplateTodo{Write the English abstract after the Indonesian abstract is stable. Keep the meaning equivalent, not necessarily word-for-word. Use clear academic English and verify terminology with your advisor.}
-
-\noindent The abstract should summarize the research problem, objective, method, data or object of study, main findings, and conclusion. Keep the claims proportional to the actual results and avoid adding information that is absent from the Indonesian abstract.
-
-\vspace{0.5cm}
-\noindent {\bfseries Keywords}: \KeywordsEN
-
-\halamanKosong
-
-% ------------------------------------------------------------
-% KATA PENGANTAR
-% ------------------------------------------------------------
-\chapter*{KATA PENGANTAR}
-\addcontentsline{toc}{chapter}{KATA PENGANTAR}
-
-Puji syukur kehadirat Tuhan Yang Maha Esa atas segala rahmat dan hidayah-Nya sehingga penulis dapat menyelesaikan Skripsi dengan judul \textbf{``\ThesisTitleID''}. Skripsi ini disusun sebagai salah satu syarat untuk memperoleh gelar Sarjana Komputer pada Program Studi Informatika Fakultas Ilmu Komputer Universitas Pembangunan Nasional Veteran Jawa Timur.
-
-\TemplateTip{Sesuaikan ucapan terima kasih dengan pihak yang benar-benar membantu. Gunakan bahasa formal, tidak terlalu panjang, dan periksa kembali urutan nama serta gelar.}
-
-Penyusunan skripsi ini memerlukan waktu, tenaga, dan komitmen, serta mendapat dukungan dari berbagai pihak. Untuk itu, penulis menyampaikan terima kasih kepada:
+\TemplateTip{\Lang{Sesuaikan ucapan terima kasih dengan pihak yang benar-benar membantu. Gunakan bahasa formal dan periksa kembali urutan nama serta gelar.}{Adjust acknowledgements to people and institutions that actually contributed. Use formal language and verify names and titles.}}
 
 \begin{enumerate}
-    \item \AdvisorOne\ selaku Dosen Pembimbing Utama yang telah memberikan bimbingan, arahan, dan waktu dalam penyusunan skripsi ini.
-    \item \AdvisorTwo\ selaku Dosen Pembimbing Pendamping yang telah memberikan masukan dan motivasi.
-    \item \DeanName\ selaku Dekan Fakultas Ilmu Komputer Universitas Pembangunan Nasional ``Veteran'' Jawa Timur.
-    \item \HeadOfProgramName\ selaku Koordinator Program Studi Informatika Fakultas Ilmu Komputer Universitas Pembangunan Nasional ``Veteran'' Jawa Timur.
-    \item Keluarga, rekan, dan pihak lain yang memberikan dukungan selama proses penyusunan skripsi.
+  \item \AdvisorOne\ \Lang{selaku Dosen Pembimbing Utama yang telah memberikan bimbingan, arahan, dan waktu dalam penyusunan \DocTypeNameLower\ ini.}{as Advisor I for guidance, direction, and time during the \DocTypeNameLower\ preparation.}
+  \item \AdvisorTwo\ \Lang{selaku Dosen Pembimbing Pendamping yang telah memberikan masukan dan motivasi.}{as Advisor II for suggestions and motivation.}
+  \item \DeanName\ \Lang{selaku Dekan Fakultas Ilmu Komputer Universitas Pembangunan Nasional ``Veteran'' Jawa Timur.}{as Dean of the Faculty of Computer Science, Universitas Pembangunan Nasional ``Veteran'' Jawa Timur.}
+  \item \HeadOfProgramName\ \Lang{selaku Koordinator \StudyProgramPhrase\ Fakultas Ilmu Komputer Universitas Pembangunan Nasional ``Veteran'' Jawa Timur.}{as Coordinator of the \StudyProgramPhrase, Faculty of Computer Science, Universitas Pembangunan Nasional ``Veteran'' Jawa Timur.}
 \end{enumerate}
-
-Penulis menyadari bahwa dalam penyusunan skripsi ini masih terdapat kekurangan. Oleh karena itu, penulis mengharapkan saran serta kritik yang membangun demi penyempurnaan karya ini. Semoga skripsi ini dapat memberikan manfaat bagi pembaca, peneliti selanjutnya, maupun pihak-pihak yang berkepentingan.
-
 \vspace{1cm}
-\begin{flushright}
-Surabaya, \DefenseDate\\[2cm]
-{\StudentName}\\
-\end{flushright}
-
+\begin{flushright}Surabaya, \DefenseDate\\[2cm]\StudentName\\\end{flushright}
 \clearpage
 
-% ── Format halaman daftar ──
-\renewcommand{\cftchapleader}{\bfseries\cftdotfill{0.8}}
-\renewcommand{\cftsecleader}{\cftdotfill{0.8}}
-\renewcommand{\cftsubsecleader}{\cftdotfill{0.8}}
-
-\titleformat{\chapter}[hang]
-  {\normalfont\normalsize\bfseries\centering}{}{0pt}{\MakeUppercase}
+% Front-matter lists
+\renewcommand{\cftchapleader}{\bfseries\cftdotfill{\ThesisDotSep}}
+\renewcommand{\cftsecleader}{\cftdotfill{\ThesisDotSep}}
+\renewcommand{\cftsubsecleader}{\cftdotfill{\ThesisDotSep}}
+\renewcommand{\cftfigleader}{\cftdotfill{\ThesisDotSep}}
+\renewcommand{\cfttableader}{\cftdotfill{\ThesisDotSep}}
+\titleformat{\chapter}[hang]{\normalfont\normalsize\bfseries\centering}{}{0pt}{\MakeUppercase}
 \titlespacing*{\chapter}{0pt}{0pt}{12pt}
+\renewcommand{\cftchappresnum}{\ContentsPrefix}
+\newlength{\mylen}\settowidth{\mylen}{\bfseries \ContentsPrefix VIII}\setlength{\cftchapnumwidth}{\mylen}
 
-\renewcommand{\cftchappresnum}{BAB }
-\newlength{\mylen}
-\settowidth{\mylen}{\bfseries BAB VIII}
-\setlength{\cftchapnumwidth}{\mylen}
-
-\phantomsection
-\tableofcontents
+\phantomsection\tableofcontents\clearpage
+\phantomsection\addcontentsline{toc}{chapter}{\listfigurename}\listoffigures\clearpage
+\phantomsection\addcontentsline{toc}{chapter}{\listtablename}\listoftables\clearpage
+\phantomsection\addcontentsline{toc}{chapter}{\listalgorithmcfname}
+\begingroup
+  \makeatletter
+  \renewcommand{\@dotsep}{\ThesisDotSep}
+  \makeatother
+  \let\OriginalNumberline\numberline
+  \renewcommand{\numberline}[1]{\OriginalNumberline{\algorithmcfname\ #1}}
+  \listofalgorithms
+\endgroup
 \clearpage
 
-\phantomsection
-\addcontentsline{toc}{chapter}{\listfigurename}
-\listoffigures
-\clearpage
-
-\phantomsection
-\addcontentsline{toc}{chapter}{\listtablename}
-\listoftables
-\clearpage
-
-\phantomsection
-\addcontentsline{toc}{chapter}{\listalgorithmcfname}
-\listofalgorithms
-\clearpage
-
-% ── Kembalikan format bab utama ──
-\titleformat{\chapter}[display]
-  {\normalfont\normalsize\bfseries\centering}
-  {BAB \thechapter}
-  {0pt}
-  {\MakeUppercase}
-\titlespacing*{\chapter}{0pt}{0pt}{12pt}
-
-\chapter*{DAFTAR SINGKATAN}
-\addcontentsline{toc}{chapter}{DAFTAR SINGKATAN}
-\TemplateTip{Hapus baris contoh yang tidak dipakai. Tambahkan singkatan hanya jika benar-benar muncul dalam naskah. Urutkan secara alfabetis.}
+\ApplyMainChapterStyle
+\chapter*{\AbbreviationListLabel}
+\addcontentsline{toc}{chapter}{\AbbreviationListLabel}
+\TemplateTip{\Lang{Hapus singkatan contoh yang tidak dipakai dan urutkan secara alfabetis.}{Remove unused example abbreviations and sort alphabetically.}}
 \begin{longtable}{@{}p{0.18\linewidth}p{0.72\linewidth}@{}}
-API      & Application Programming Interface \\
-CNN      & Convolutional Neural Network \\
-IoT      & Internet of Things \\
-UI       & User Interface \\
+API & Application Programming Interface \\
+CNN & Convolutional Neural Network \\
+UI & User Interface \\
 \end{longtable}
 \clearpage
 \mainmattergeometry
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-% ============================================================
-% BAB-BAB UTAMA
-% ============================================================
 \input{chapters/ch01-introduction}
 \input{chapters/ch02-literature-review}
 \input{chapters/ch03-methodology}
 \input{chapters/ch04-results-discussion}
 \input{chapters/ch05-conclusion-recommendations}
 
-% ============================================================
-% DAFTAR PUSTAKA DAN LAMPIRAN
-% ============================================================
+% Back matter: bibliography and appendix appear without BAB/CHAPTER prefix in TOC.
 \clearpage
-\addcontentsline{toc}{chapter}{DAFTAR PUSTAKA}
+\phantomsection
+\addtocontents{toc}{\protect\renewcommand{\protect\cftchappresnum}{}}
+\addtocontents{toc}{\protect\setlength{\protect\cftchapnumwidth}{0pt}}
+\addcontentsline{toc}{chapter}{\BibliographyLabel}
 \bibliographystyle{unsrt}
 \bibliography{references/example}
 
-\clearpage 
-\addcontentsline{toc}{chapter}{LAMPIRAN}
+\clearpage
 \input{appendices/appA}
 
 \end{document}
