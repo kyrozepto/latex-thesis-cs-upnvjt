@@ -184,6 +184,7 @@
   \listofalgorithms
 \endgroup
 \clearpage
+\phantomsection\addcontentsline{toc}{chapter}{\AppendixListLabel}\listofappendices\clearpage
 
 \ApplyMainChapterStyle
 \chapter*{\AbbreviationListLabel}
@@ -210,6 +211,7 @@
 \bibliography{references/example}
 
 \clearpage
+\setcounter{tocdepth}{0}
 \input{appendices/\ThesisLanguage/appA}
 
 \end{document}

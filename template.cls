@@ -163,6 +163,25 @@
 \setlength{\cfttabnumwidth}{5.2em}
 
 \makeatletter
+\newcommand{\listofappendices}{%
+  \chapter*{\AppendixListLabel}%
+  \@starttoc{loa}%
+}
+\newcommand*{\l@appendixsection}{\@dottedtocline{1}{0pt}{2.8em}}
+\newcommand*{\l@appendixsubsection}{\@dottedtocline{2}{1.5em}{3.8em}}
+\newcommand{\AppendixSection}[1]{%
+  \phantomsection
+  \section*{#1}%
+  \addcontentsline{loa}{appendixsection}{#1}%
+}
+\newcommand{\AppendixSubsection}[1]{%
+  \phantomsection
+  \subsection*{#1}%
+  \addcontentsline{loa}{appendixsubsection}{#1}%
+}
+\makeatother
+
+\makeatletter
 \@ifpackageloaded{algorithm2e}{%
   \@addtoreset{algocf}{chapter}%
   \renewcommand{\thealgocf}{\arabic{chapter}. \arabic{algocf}}%

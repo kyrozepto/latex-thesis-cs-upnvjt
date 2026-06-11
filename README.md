@@ -23,6 +23,7 @@ Fokus utama versi ini adalah **mode bahasa yang mudah diganti**. Mahasiswa dapat
 - Isi naskah dipisah per bahasa di folder `indonesian/` dan `english/`, sehingga mahasiswa dapat menulis secara natural tanpa `\Lang{...}{...}`.
 - Chapter, section, caption, daftar isi, daftar gambar, daftar tabel, daftar kode, daftar pustaka, dan lampiran dapat mengikuti bahasa yang dipilih.
 - `DAFTAR PUSTAKA`/`BIBLIOGRAPHY` dan `LAMPIRAN`/`APPENDIX` masuk daftar isi tanpa awalan `BAB`/`CHAPTER`.
+- Detail lampiran ditampilkan di halaman khusus `DAFTAR LAMPIRAN`/`LIST OF APPENDICES`, bukan di `DAFTAR ISI`/`TABLE OF CONTENTS`.
 
 ## Struktur project
 
@@ -275,6 +276,17 @@ Jika menambah file BibTeX baru, ubah bagian akhir `main.tex`:
 \bibliography{references/example,references/nama_file_baru}
 ```
 
+## Menambahkan lampiran
+
+Halaman `DAFTAR ISI` hanya menampilkan satu entri `LAMPIRAN` / `APPENDIX`. Agar detail lampiran masuk ke halaman khusus `DAFTAR LAMPIRAN` / `LIST OF APPENDICES`, gunakan:
+
+```latex
+\AppendixSection{Lampiran A. Judul Lampiran}
+\AppendixSubsection{A.1 Judul Subbagian Lampiran}
+```
+
+Jangan gunakan `\section` atau `\subsection` biasa untuk judul lampiran jika detailnya tidak ingin muncul di `DAFTAR ISI`.
+
 ## Menghapus tips template sebelum final
 
 Template memakai helper:
@@ -317,6 +329,7 @@ The template is designed around centralized configuration. Most document metadat
 - The template includes examples for tables, figures, mathematical notation, and code/algorithm blocks.
 - Table of contents, list of figures, list of tables, list of code, bibliography, and appendix headings follow the selected language.
 - Bibliography and appendix entries are added to the table of contents without `BAB` or `CHAPTER` prefixes.
+- Appendix details are shown on a dedicated `DAFTAR LAMPIRAN` / `LIST OF APPENDICES` page, not in the table of contents.
 
 ## Project Structure
 
@@ -480,6 +493,17 @@ It uses:
 Mathematical equations use the `equation` environment and are numbered with Arabic chapter numbers, such as `(2.1)`, even when the chapter title is displayed as `BAB II`.
 
 Code or algorithm examples use `algorithm2e`. Their captions are listed under `DAFTAR KODE` or `LIST OF CODE`, with numbering such as `Kode Program 3. 1`.
+
+## Adding Appendices
+
+The table of contents shows only one `LAMPIRAN` / `APPENDIX` entry. To list appendix details on the dedicated `DAFTAR LAMPIRAN` / `LIST OF APPENDICES` page, use:
+
+```latex
+\AppendixSection{Appendix A. Appendix Title}
+\AppendixSubsection{A.1 Appendix Subsection Title}
+```
+
+Do not use normal `\section` or `\subsection` commands for appendix headings if those details should stay out of the table of contents.
 
 ## Before Final Submission
 
