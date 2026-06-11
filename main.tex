@@ -146,8 +146,7 @@
  & & 2. \AdvisorTwo \\
 \end{tabular}
 \vspace{0.5cm}
-\TemplateTodo{\Lang{Tulis abstrak sesuai bahasa dokumen. Jika dokumen berbahasa Indonesia, bagian ini menjadi ABSTRAK. Jika \texttt{\textbackslash ThesisLanguage} diubah ke \texttt{english}, bagian ini otomatis menjadi ABSTRACT.}{Write the abstract in the selected document language. When \texttt{\textbackslash ThesisLanguage} is set to \texttt{english}, labels and guidance become English.}}
-\noindent \Lang{Paragraf abstrak memuat konteks, tujuan, metode, data atau objek penelitian, hasil utama, dan kesimpulan. Hindari sitasi dan klaim yang belum dibuktikan.}{The abstract summarizes the context, objective, method, data or research object, main findings, and conclusion. Avoid citations and unsupported claims.}
+\input{content/\ThesisLanguage/abstract}
 \vspace{0.5cm}
 
 \noindent {\bfseries \Lang{Kata Kunci}{Keywords}}: \Lang{\KeywordsID}{\KeywordsEN}
@@ -156,16 +155,7 @@
 
 \chapter*{\PrefaceLabel}
 \addcontentsline{toc}{chapter}{\PrefaceLabel}
-\Lang{Puji syukur kehadirat Tuhan Yang Maha Esa atas segala rahmat dan hidayah-Nya sehingga penulis dapat menyelesaikan \DocTypeLabel\ dengan judul \textbf{``\ThesisTitle''}. \DegreeRequirement}{The author expresses gratitude to God Almighty for the completion of this \DocTypeLabel\ entitled \textbf{``\ThesisTitle''}. \DegreeRequirement}
-
-\TemplateTip{\Lang{Sesuaikan ucapan terima kasih dengan pihak yang benar-benar membantu. Gunakan bahasa formal dan periksa kembali urutan nama serta gelar.}{Adjust acknowledgements to people and institutions that actually contributed. Use formal language and verify names and titles.}}
-
-\begin{enumerate}
-  \item \AdvisorOne\ \Lang{selaku Dosen Pembimbing Utama yang telah memberikan bimbingan, arahan, dan waktu dalam penyusunan \DocTypeNameLower\ ini.}{as Advisor I for guidance, direction, and time during the \DocTypeNameLower\ preparation.}
-  \item \AdvisorTwo\ \Lang{selaku Dosen Pembimbing Pendamping yang telah memberikan masukan dan motivasi.}{as Advisor II for suggestions and motivation.}
-  \item \DeanName\ \Lang{selaku Dekan Fakultas Ilmu Komputer Universitas Pembangunan Nasional ``Veteran'' Jawa Timur.}{as Dean of the Faculty of Computer Science, Universitas Pembangunan Nasional ``Veteran'' Jawa Timur.}
-  \item \HeadOfProgramName\ \Lang{selaku Koordinator \StudyProgramPhrase\ Fakultas Ilmu Komputer Universitas Pembangunan Nasional ``Veteran'' Jawa Timur.}{as Coordinator of the \StudyProgramPhrase, Faculty of Computer Science, Universitas Pembangunan Nasional ``Veteran'' Jawa Timur.}
-\end{enumerate}
+\input{content/\ThesisLanguage/preface}
 \vspace{1cm}
 \begin{flushright}Surabaya, \DefenseDate\\[2cm]\StudentName\\\end{flushright}
 \clearpage
@@ -198,22 +188,17 @@
 \ApplyMainChapterStyle
 \chapter*{\AbbreviationListLabel}
 \addcontentsline{toc}{chapter}{\AbbreviationListLabel}
-\TemplateTip{\Lang{Hapus singkatan contoh yang tidak dipakai dan urutkan secara alfabetis.}{Remove unused example abbreviations and sort alphabetically.}}
-\begin{longtable}{@{}p{0.18\linewidth}p{0.72\linewidth}@{}}
-API & Application Programming Interface \\
-CNN & Convolutional Neural Network \\
-UI & User Interface \\
-\end{longtable}
+\input{content/\ThesisLanguage/abbreviations}
 \clearpage
 \mainmattergeometry
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-\input{chapters/ch01-introduction}
-\input{chapters/ch02-literature-review}
-\input{chapters/ch03-methodology}
-\input{chapters/ch04-results-discussion}
-\input{chapters/ch05-conclusion-recommendations}
+\input{chapters/\ThesisLanguage/ch01-introduction}
+\input{chapters/\ThesisLanguage/ch02-literature-review}
+\input{chapters/\ThesisLanguage/ch03-methodology}
+\input{chapters/\ThesisLanguage/ch04-results-discussion}
+\input{chapters/\ThesisLanguage/ch05-conclusion-recommendations}
 
 % Back matter: bibliography and appendix appear without BAB/CHAPTER prefix in TOC.
 \clearpage
@@ -225,6 +210,6 @@ UI & User Interface \\
 \bibliography{references/example}
 
 \clearpage
-\input{appendices/appA}
+\input{appendices/\ThesisLanguage/appA}
 
 \end{document}

@@ -12,13 +12,15 @@ Fokus utama versi ini adalah **mode bahasa yang mudah diganti**. Mahasiswa dapat
 - Metadata dipusatkan di `config/thesis-config.tex`.
 - Label dokumen dipusatkan di `config/thesis-language.tex`.
 - Tipe dokumen dapat dipilih antara `skripsi` dan `tesis`.
-- Struktur dokumen tetap sederhana:
+- Struktur dokumen tetap sederhana dan ramah pemula:
   - `main.tex` sebagai file utama.
   - `template.cls` untuk format halaman dan tipografi.
   - `chapters/` untuk Bab I sampai Bab V.
+  - `content/` untuk abstrak, kata pengantar, dan daftar singkatan.
   - `appendices/` untuk lampiran.
   - `references/` untuk BibTeX.
   - `figures/` untuk gambar.
+- Isi naskah dipisah per bahasa di folder `indonesian/` dan `english/`, sehingga mahasiswa dapat menulis secara natural tanpa `\Lang{...}{...}`.
 - Chapter, section, caption, daftar isi, daftar gambar, daftar tabel, daftar kode, daftar pustaka, dan lampiran dapat mengikuti bahasa yang dipilih.
 - `DAFTAR PUSTAKA`/`BIBLIOGRAPHY` dan `LAMPIRAN`/`APPENDIX` masuk daftar isi tanpa awalan `BAB`/`CHAPTER`.
 
@@ -32,14 +34,33 @@ Fokus utama versi ini adalah **mode bahasa yang mudah diganti**. Mahasiswa dapat
 ├── config/
 │   ├── thesis-config.tex      # metadata dan pilihan bahasa
 │   └── thesis-language.tex    # kamus label Indonesia/English
+├── content/
+│   ├── indonesian/
+│   │   ├── abstract.tex
+│   │   ├── preface.tex
+│   │   └── abbreviations.tex
+│   └── english/
+│       ├── abstract.tex
+│       ├── preface.tex
+│       └── abbreviations.tex
 ├── chapters/
-│   ├── ch01-introduction.tex
-│   ├── ch02-literature-review.tex
-│   ├── ch03-methodology.tex
-│   ├── ch04-results-discussion.tex
-│   └── ch05-conclusion-recommendations.tex
+│   ├── indonesian/
+│   │   ├── ch01-introduction.tex
+│   │   ├── ch02-literature-review.tex
+│   │   ├── ch03-methodology.tex
+│   │   ├── ch04-results-discussion.tex
+│   │   └── ch05-conclusion-recommendations.tex
+│   └── english/
+│       ├── ch01-introduction.tex
+│       ├── ch02-literature-review.tex
+│       ├── ch03-methodology.tex
+│       ├── ch04-results-discussion.tex
+│       └── ch05-conclusion-recommendations.tex
 ├── appendices/
-│   └── appA.tex
+│   ├── indonesian/
+│   │   └── appA.tex
+│   └── english/
+│       └── appA.tex
 ├── figures/
 │   ├── README.md
 │   └── example-figure.pdf
@@ -67,7 +88,13 @@ Ganti menjadi:
 \newcommand{\ThesisLanguage}{english}
 ```
 
-Lalu compile ulang. Sebagian besar label akan berubah otomatis, misalnya:
+Lalu compile ulang. Template otomatis mengambil isi dari folder yang sesuai:
+
+- `content/indonesian/` atau `content/english/`
+- `chapters/indonesian/` atau `chapters/english/`
+- `appendices/indonesian/` atau `appendices/english/`
+
+Sebagian besar label juga akan berubah otomatis, misalnya:
 
 - `Skripsi` → `Undergraduate Thesis`
 - `BAB I` → `CHAPTER I`
@@ -126,27 +153,43 @@ Bagian yang biasanya perlu diganti:
 
 Nama dekan dan koordinator program studi tetap disediakan dalam konfigurasi, tetapi harus tetap diverifikasi dengan pedoman fakultas/prodi terbaru sebelum pengumpulan resmi.
 
-## Cara menulis isi bab dalam dua bahasa
+## Cara menulis isi naskah
 
-Template menyediakan perintah:
+Mahasiswa tidak perlu memakai `\Lang{...}{...}` saat menulis bab. Tulis naskah secara natural di folder bahasa yang dipakai.
 
-```latex
-\Lang{teks Bahasa Indonesia}{English text}
+Jika `\ThesisLanguage` bernilai `indonesian`, edit file di:
+
+```text
+content/indonesian/
+chapters/indonesian/
+appendices/indonesian/
 ```
 
-Contoh:
+Jika `\ThesisLanguage` bernilai `english`, edit file di:
 
-```latex
-\section{\Lang{Latar Belakang}{Background}}
+```text
+content/english/
+chapters/english/
+appendices/english/
 ```
 
-Jika `\ThesisLanguage` bernilai `indonesian`, yang tampil adalah `Latar Belakang`.
-Jika bernilai `english`, yang tampil adalah `Background`.
+Contoh isi bab Bahasa Indonesia:
 
-Untuk naskah final, mahasiswa boleh memilih salah satu pendekatan:
+```latex
+\section{Latar Belakang}
 
-1. Tetap memakai `\Lang{...}{...}` agar satu source dapat menghasilkan dua versi bahasa.
-2. Menghapus sisi bahasa yang tidak dipakai setelah final jika hanya ingin mempertahankan satu versi.
+Tuliskan latar belakang penelitian di sini.
+```
+
+Contoh isi bab English:
+
+```latex
+\section{Background}
+
+Write the research background here.
+```
+
+Perintah `\Lang{...}{...}` tetap tersedia, tetapi sebaiknya hanya digunakan di file template/config, bukan di file naskah mahasiswa.
 
 ## Cara compile
 
@@ -169,7 +212,7 @@ Simpan gambar ke folder `figures/`, lalu gunakan:
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth]{example-figure.pdf}
-\caption{\Lang{Judul gambar Bahasa Indonesia}{English figure caption}}
+\caption{Judul gambar}
 \label{fig:example-figure}
 \end{figure}
 ```
@@ -186,7 +229,7 @@ atau untuk English:
 Figure~\ref{fig:example-figure}
 ```
 
-Contoh figure sudah tersedia di `chapters/ch02-literature-review.tex` dan memakai file `figures/example-figure.pdf`.
+Contoh figure sudah tersedia di `chapters/indonesian/ch02-literature-review.tex` dan `chapters/english/ch02-literature-review.tex`, memakai file `figures/example-figure.pdf`.
 
 ## Menambahkan notasi matematika
 
@@ -206,11 +249,11 @@ Template memakai `algorithm2e` untuk contoh kode program/algoritma. Gunakan:
 
 ```latex
 \begin{algorithm}[H]
-\caption{\Lang{Contoh format algoritma penelitian}{Example research algorithm format}}
-\KwInput{\Lang{Data atau masukan penelitian}{Research data or input}}
-\KwOutput{\Lang{Hasil yang dievaluasi}{Evaluated results}}
-\Lang{Lakukan tahap persiapan data}{Perform data preparation}\;
-\KwReturn{\Lang{Ringkasan hasil dan analisis}{Summary of results and analysis}}
+\caption{Contoh format algoritma penelitian}
+\KwInput{Data atau masukan penelitian}
+\KwOutput{Hasil yang dievaluasi}
+Lakukan tahap persiapan data\;
+\KwReturn{Ringkasan hasil dan analisis}
 \end{algorithm}
 ```
 
@@ -267,6 +310,7 @@ The template is designed around centralized configuration. Most document metadat
 ## Main Features
 
 - One source project for Indonesian and English document labels.
+- Language-specific content folders, so students can write naturally without wrapping prose in `\Lang{...}{...}`.
 - Document type can be selected as `skripsi` or `tesis`.
 - Main metadata is centralized in `config/thesis-config.tex`.
 - Language labels are centralized in `config/thesis-language.tex`.
@@ -284,14 +328,33 @@ The template is designed around centralized configuration. Most document metadat
 ├── config/
 │   ├── thesis-config.tex
 │   └── thesis-language.tex
+├── content/
+│   ├── indonesian/
+│   │   ├── abstract.tex
+│   │   ├── preface.tex
+│   │   └── abbreviations.tex
+│   └── english/
+│       ├── abstract.tex
+│       ├── preface.tex
+│       └── abbreviations.tex
 ├── chapters/
-│   ├── ch01-introduction.tex
-│   ├── ch02-literature-review.tex
-│   ├── ch03-methodology.tex
-│   ├── ch04-results-discussion.tex
-│   └── ch05-conclusion-recommendations.tex
+│   ├── indonesian/
+│   │   ├── ch01-introduction.tex
+│   │   ├── ch02-literature-review.tex
+│   │   ├── ch03-methodology.tex
+│   │   ├── ch04-results-discussion.tex
+│   │   └── ch05-conclusion-recommendations.tex
+│   └── english/
+│       ├── ch01-introduction.tex
+│       ├── ch02-literature-review.tex
+│       ├── ch03-methodology.tex
+│       ├── ch04-results-discussion.tex
+│       └── ch05-conclusion-recommendations.tex
 ├── appendices/
-│   └── appA.tex
+│   ├── indonesian/
+│   │   └── appA.tex
+│   └── english/
+│       └── appA.tex
 ├── figures/
 │   ├── README.md
 │   └── example-figure.pdf
@@ -318,7 +381,7 @@ Available values are:
 - `indonesian`
 - `english`
 
-When set to `english`, labels such as `BAB`, `DAFTAR ISI`, `DAFTAR GAMBAR`, and `DAFTAR PUSTAKA` are rendered as `CHAPTER`, `TABLE OF CONTENTS`, `LIST OF FIGURES`, and `BIBLIOGRAPHY`.
+When set to `english`, the template loads content from `content/english/`, `chapters/english/`, and `appendices/english/`. Labels such as `BAB`, `DAFTAR ISI`, `DAFTAR GAMBAR`, and `DAFTAR PUSTAKA` are rendered as `CHAPTER`, `TABLE OF CONTENTS`, `LIST OF FIGURES`, and `BIBLIOGRAPHY`.
 
 ## Changing the Document Type
 
@@ -365,21 +428,27 @@ Common fields to update include:
 
 Dean and head-of-program metadata is also provided in the config file, but it should be verified against the latest official faculty or program guide before submission.
 
-## Writing Bilingual Content
+## Writing Content
 
-The template provides:
+Students do not need to use `\Lang{...}{...}` when writing thesis content. Write naturally in the folder for the selected language.
 
-```latex
-\Lang{Indonesian text}{English text}
+For Indonesian, edit:
+
+```text
+content/indonesian/
+chapters/indonesian/
+appendices/indonesian/
 ```
 
-Example:
+For English, edit:
 
-```latex
-\section{\Lang{Latar Belakang}{Background}}
+```text
+content/english/
+chapters/english/
+appendices/english/
 ```
 
-If `\ThesisLanguage` is `indonesian`, the Indonesian text is rendered. If it is `english`, the English text is rendered.
+The `\Lang{...}{...}` command is still available for template/config internals, but it should normally stay out of student-facing content files.
 
 ## Compiling
 
@@ -399,7 +468,7 @@ If the document does not use BibTeX citations yet, the `bibtex main` step can be
 The template includes a figure example in:
 
 ```text
-chapters/ch02-literature-review.tex
+chapters/english/ch02-literature-review.tex
 ```
 
 It uses:

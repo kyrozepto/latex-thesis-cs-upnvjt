@@ -1,0 +1,64 @@
+\chapter{Literature Review}
+
+\section{Related Work}
+\TemplateTodo{Summarize the most relevant related studies. Explain their objectives, methods, data, results, and limitations. End by positioning your study against those works.}
+
+A literature review is not merely a list of article summaries. Organize it thematically so readers understand the development of knowledge, remaining gaps, and why this study is needed.
+
+\begin{table}[H]
+\centering
+\caption{Example format for summarizing related work}
+\begin{tabularx}{\linewidth}{@{}p{0.18\linewidth}X X@{}}
+\toprule
+Author & Focus and Method & Relevance to This \DocTypeName \\
+\midrule
+Author name (year) & Short summary of method, data, and main results. & Explain lessons, gaps, or distinctions for your research. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Theoretical Foundation}
+\TemplateTodo{Explain concepts, theories, algorithms, standards, or frameworks that are actually used in the study.}
+
+\subsection{First Main Concept}
+Write the definition, working principle, and relevance of the concept to the study. Use citations for definitions or theories that are not your own opinion.
+
+\subsection{Second Main Concept}
+Add other concepts as needed. If using formulas, explain the meaning of each symbol and why the formula is used.
+
+\section{Conceptual Framework}
+\TemplateTodo{Explain the relationship between the problem, theory, method, data, and research outputs. A conceptual diagram can help this section.}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\linewidth]{example-figure.pdf}
+\caption{Example figure usage in the template}
+\label{fig:example-figure}
+\end{figure}
+
+An example of figure usage is shown in Figure~\ref{fig:example-figure}. Mathematical notation can be used to explain the relationship between layers in Figure~\ref{fig:example-figure}. Let the input vector be denoted as
+\begin{equation}
+\mathbf{x} =
+\begin{bmatrix}
+x_1 & x_2 & \cdots & x_n
+\end{bmatrix}^{\mathsf{T}}.
+\end{equation}
+For the $l$-th hidden layer, neuron activations are computed by
+\begin{equation}
+\mathbf{a}^{[l]} = \sigma\left(\mathbf{W}^{[l]}\mathbf{a}^{[l-1]} + \mathbf{b}^{[l]}\right),
+\qquad l = 1,2,\ldots,L-1,
+\end{equation}
+where $\mathbf{a}^{[0]}=\mathbf{x}$, $\mathbf{W}^{[l]}$
+is the weight matrix at layer $l$,
+$\mathbf{b}^{[l]}$ is the bias vector, and
+$\sigma(\cdot)$ is the activation function. The model output is denoted as
+\begin{equation}
+\hat{\mathbf{y}} = f\left(\mathbf{W}^{[L]}\mathbf{a}^{[L-1]} + \mathbf{b}^{[L]}\right),
+\end{equation}
+with output components
+\begin{equation}
+\hat{\mathbf{y}} =
+\begin{bmatrix}
+\hat{y}_1 & \hat{y}_2 & \cdots & \hat{y}_k
+\end{bmatrix}^{\mathsf{T}}.
+\end{equation}
