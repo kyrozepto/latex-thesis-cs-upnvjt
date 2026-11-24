@@ -62,6 +62,40 @@
 
 \newcommand{\barw}{7pt}
 
+% ------------------------------------------------------------------
+% Grid matriks. Dipakai untuk gambar konvolusi, pooling, padding, dan
+% perhitungan manual lain yang menampilkan nilai per sel.
+%
+%   \gridmat{<ukuran sel>}{<gaya tambahan sel>}{{{1,2},{3,4}}}
+%
+% Sel pertama menempati kuadran kanan-bawah titik (0,0), sehingga baris
+% bertambah ke bawah dan kolom bertambah ke kanan seperti indeks matriks.
+% Catatan: pgfmath bekerja dalam satuan pt dengan batas ~16384, jadi hindari
+% hasil antara yang besar pada nilai sel.
+% ------------------------------------------------------------------
+\tikzset{
+  sel/.style={draw=black!55, fill=white, line width=0.35pt},
+  selaksen/.style={sel, fill=aksen!18, draw=aksen},
+  seldua/.style={sel, fill=aksendua!18, draw=aksendua},
+  selnol/.style={sel, fill=gray!12, draw=black!35},
+}
+% Ukuran huruf isi sel. Di-\renewcommand pada gambar yang selnya rapat.
+\newcommand{\gridfont}{\footnotesize}
+\newcommand{\gridmat}[3]{%
+  \foreach \gridrow [count=\gr from 0] in #3 {%
+    \foreach \gridval [count=\gc from 0] in \gridrow {%
+      \draw[sel,#2] (\gc*#1, -\gr*#1) rectangle ++(#1,-#1);
+      \node[font=\gridfont] at (\gc*#1+0.5*#1, -\gr*#1-0.5*#1) {\gridval};
+    }%
+  }%
+}
+
+% Sorotan window pada grid: #1 ukuran sel, #2 kolom awal (0-basis),
+% #3 baris awal (0-basis), #4 lebar window, #5 gaya garis.
+%   \window{0.6}{1}{1}{3}{draw=aksen, line width=1.2pt}
+\newcommand{\window}[5]{%
+  \draw[#5] (#2*#1, -#3*#1) rectangle ++(#4*#1, -#4*#1);}
+
 % Label panel (a)/(b)/(c) di bawah sebuah axis bernama.
 % Anchor "below south" milik pgfplots berada di bawah seluruh elemen axis,
 % termasuk label sumbu, sehingga label panel tidak pernah bertabrakan dengannya.

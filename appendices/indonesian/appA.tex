@@ -1,15 +1,59 @@
 \appendix
-\clearpage
+\ThesisPageBreak
 \phantomsection
 \addcontentsline{toc}{chapter}{\AppendixLabel}
 \chapter*{\AppendixLabel}
 
-\TemplateTodo{Gunakan lampiran untuk materi pendukung yang terlalu panjang jika ditempatkan di bab utama, misalnya instrumen penelitian, konfigurasi eksperimen, transkrip wawancara, bukti pengujian, atau dokumentasi tambahan.}
+% Penomoran materi lampiran dipisahkan dari penomoran bab utama agar tabel dan
+% gambar pendukung tidak melanjutkan nomor Bab IV: Tabel L.1, Gambar L.1, dan
+% seterusnya.
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\renewcommand{\thetable}{L.\arabic{table}}
+\renewcommand{\thefigure}{L.\arabic{figure}}
 
-Lampiran harus tetap dirujuk dari bab utama. Jangan memasukkan materi yang tidak pernah disebutkan dalam naskah.
+\TemplateTodo{Gunakan lampiran untuk materi pendukung yang terlalu panjang jika ditempatkan di bab utama, misalnya instrumen penelitian, konfigurasi eksperimen, tabel hasil lengkap, bukti pengujian, dokumen etik, atau lembar validasi data.}
 
-\AppendixSection{Lampiran A. Contoh Lampiran}
+Tuliskan satu paragraf pengantar yang menyebutkan isi seluruh lampiran. Setiap lampiran harus dirujuk dari bab utama; jangan memasukkan materi yang tidak pernah disebutkan dalam naskah.
+
+% Format lampiran:
+%   - \AppendixSection{Lampiran 1. Judul}, Lampiran 2, dan seterusnya: lampiran
+%     diberi nomor angka, bukan huruf. Lampiran kedua dan seterusnya otomatis
+%     dimulai di halaman baru.
+%   - \AppendixSubsection{Judul} tanpa nomor.
+%   - Keduanya tercatat di DAFTAR LAMPIRAN, bukan di DAFTAR ISI.
+%   - \label tepat setelah keduanya dapat dirujuk dari bab dengan \nameref,
+%     yang mencetak judulnya: "Lampiran \nameref{sec:lampiran-contoh}".
+
+\AppendixSection{Lampiran 1. Contoh Lampiran}\label{sec:lampiran-contoh}
 Tuliskan isi lampiran di sini. Jika lampiran berupa kode, data, atau gambar, pastikan informasi sensitif sudah dihapus sebelum repositori dipublikasikan.
 
-\AppendixSubsection{A.1 Contoh Subbagian Lampiran}
-Tambahkan rincian lampiran di sini bila diperlukan.
+\AppendixSubsection{Contoh Subbagian Lampiran}\label{sec:lampiran-contoh-sub}
+Rincian pendukung ditunjukkan pada Tabel \ref{tab:lampiran-contoh}.
+
+\begin{longtable}{|l|c|c|}
+\caption{Contoh tabel lampiran.}\label{tab:lampiran-contoh}\\
+\hline
+Konfigurasi & Metrik 1 & Metrik 2 \\
+\hline
+\endfirsthead
+\hline
+Konfigurasi & Metrik 1 & Metrik 2 \\
+\hline
+\endhead
+\hline
+\endlastfoot
+Konfigurasi A & 0,00 & 0,00 \\
+\hline
+Konfigurasi B & 0,00 & 0,00 \\
+\end{longtable}
+
+\AppendixSection{Lampiran 2. Dokumen Pendukung}\label{sec:lampiran-dokumen}
+Pindaian dokumen, misalnya surat keterangan etik atau lembar validasi data, disisipkan sebagai gambar berbingkai.
+
+\begin{figure}[H]
+\centering
+\BorderedGraphics[width=0.6\linewidth]{example-figure.pdf}
+\caption{Contoh pindaian dokumen pendukung.}
+\label{fig:lampiran-dokumen}
+\end{figure}

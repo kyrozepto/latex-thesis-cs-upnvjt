@@ -2,13 +2,31 @@
 % -----------------------------------------------------------------------------
 % SIGNATURE SHEETS, ABSTRACT, AND PREFACE
 % -----------------------------------------------------------------------------
-% Only the final manuscript carries these pages. A proposal is not defended and
-% a supervision draft is not signed, so both skip this file entirely.
+% Wording and layout of the three signature pages follow the faculty's 2026
+% sample thesis book (Indonesian and English editions). Check them against the
+% latest guide from your study program before printing.
+%
+% Which pages appear depends on \ThesisTarget:
+%
+%                              proposal   draft   semhas   full
+%   LEMBAR PENGESAHAN              -        -        -       yes
+%   LEMBAR PERSETUJUAN             -        -        -       yes
+%   PERNYATAAN ORISINALITAS        -        -        -       yes
+%   ABSTRAK                        -        -       yes      yes
+%   KATA PENGANTAR                 -        -        -       yes
+%
+% A proposal is not defended and a supervision draft is not signed. The results
+% seminar (semhas) needs the abstract but nothing that is signed.
+%
+% \ThesisBlankPage and \ThesisPageBreak (template.cls) insert a "sengaja
+% dikosongkan" page in the screen edition and move to the next right-hand page
+% in the print edition.
+\ifThesisComplete
+
+\ThesisBlankPage
+
 \ifThesisFull
-
-\halamanKosong
-
-% ── LEMBAR PENGESAHAN: signed by the examination committee and the dean.
+% ── LEMBAR PENGESAHAN: signed by both advisors, both examiners, and the dean.
 % \BgThispage draws the faint UPN logo watermark on this page only.
 \chapter*{\ApprovalSheetLabel}
 \addcontentsline{toc}{chapter}{\ApprovalSheetLabel}
@@ -18,9 +36,9 @@
 \vspace{0.2cm}
 \begin{center}\ByLabel:\\ \StudentNameUpper\\ \NpmLabel. \StudentID\end{center}
 \vspace{0.5cm}
-\noindent \Lang{Telah dipertahankan di hadapan dan diterima oleh Tim Penguji \DocTypeName\ \StudyProgramPhrase\ Fakultas Ilmu Komputer Universitas Pembangunan Nasional Veteran Jawa Timur pada tanggal \DefenseDate.}{This \DocTypeNameLower\ has been defended before and accepted by the \DocTypeName\ Examination Committee of the \StudyProgramPhrase, Faculty of Computer Science, Universitas Pembangunan Nasional Veteran Jawa Timur on \DefenseDate.}
+\noindent \Lang{Telah dipertahankan di hadapan, dan disetujui oleh, Dewan Penguji Ujian \DocTypeName\ \StudyProgramPhrase, Fakultas Ilmu Komputer, Universitas Pembangunan Nasional Veteran Jawa Timur, pada tanggal \DefenseDate:}{Has been defended before, and accepted by, the Board of Assessors of the Thesis Examination of the \StudyProgramPhrase, Faculty of Computer Science, Universitas Pembangunan Nasional Veteran Jawa Timur, on \DefenseDate:}
 \vspace{0.2cm}
-\begin{center}\bfseries \AgreeLabel\end{center}
+\begin{center}\bfseries \ApprovedLabel\end{center}
 \vspace{0.2cm}
 \noindent\begin{tabular}{@{}p{0.67\linewidth} p{0.15\linewidth} p{0.25\linewidth}@{}}
 \textbf{\underline{\AdvisorOne}} & \underline{\makebox[\linewidth]{\dotfill}} & \textbf{(\AdvisorOneRole)} \\
@@ -33,11 +51,12 @@
 \ExaminerTwoID & & \\
 \end{tabular}
 \vspace{0.8cm}
-\begin{center}\begin{tabular}{@{}c@{}}\bfseries \KnowLabel\\\bfseries \DeanRoleLabel\\[2cm]\bfseries {\underline{\DeanName}}\\\DeanID\end{tabular}\end{center}
+\begin{center}\begin{tabular}{@{}c@{}}\bfseries \EndorsedByLabel\\[1em]\bfseries \DeanRoleLabel\\[2cm]\bfseries {\underline{\DeanName}}\\\DeanID\end{tabular}\end{center}
 
-\halamanKosong
+\ThesisBlankPage
 
-% ── LEMBAR PERSETUJUAN: signed by the study-program coordinator.
+% ── LEMBAR PERSETUJUAN: the study-program coordinator approves the manuscript
+% for the thesis examination.
 \chapter*{\AcceptanceSheetLabel}
 \addcontentsline{toc}{chapter}{\AcceptanceSheetLabel}
 \BgThispage
@@ -45,58 +64,89 @@
 \begin{center}{\bfseries\normalsize \ThesisTitleUpper\par}\end{center}
 \vspace{0.2cm}
 \begin{center}\ByLabel:\\ \StudentNameUpper\\ \NpmLabel. \StudentID\end{center}
-\vspace{7.5cm}
-\begin{center}\begin{tabular}{@{}c@{}}\bfseries \AgreeLabel\\\bfseries \HeadProgramRoleLabel\\\bfseries \FacultyLabel\\[2cm]\bfseries {\underline{\HeadOfProgramName}}\\\HeadOfProgramID\end{tabular}\end{center}
+\vspace{1cm}
+\begin{center}\Lang{Disetujui untuk melanjutkan ke Ujian \DocTypeName}{Approved to proceed to the Thesis Examination}\end{center}
+\vspace{6cm}
+\begin{center}\begin{tabular}{@{}c@{}}\bfseries \ApprovedByLabel\\[1em]\bfseries \HeadProgramRoleLabel\\\bfseries \FacultyLabel\\[2cm]\bfseries {\underline{\HeadOfProgramName}}\\\HeadOfProgramID\end{tabular}\end{center}
 
-\halamanKosong
+\ThesisBlankPage
 
-% ── SURAT PERNYATAAN BEBAS PLAGIASI
+% ── PERNYATAAN ORISINALITAS
+% Ask your study program whether a meterai (duty stamp) is required on the
+% signature. The QR code links to \OriginalityQRLink; it is left out when that
+% link is empty.
 \chapter*{\PlagiarismStatementLabel}
 \addcontentsline{toc}{chapter}{\PlagiarismStatementLabel}
 \vspace{0.5cm}
-\noindent \Lang{Yang bertanda tangan di bawah ini:}{The undersigned:}\par
+\noindent \Lang{Saya yang bertanda tangan di bawah ini:}{I am the undersigned:}\par
 \vspace{0.3cm}
 \begin{tabular}{@{} l c l @{}}
-\StudentNameLabel & : & \StudentName \\
-\NpmLabel         & : & \StudentID \\
-\Lang{Program}{Program} & : & \ProgramDegreeLabel \\
+\Lang{Nama}{Student Name} & : & \StudentName \\
+\NpmLabel & : & \StudentID \\
+\Lang{Gelar}{Degree Program} & : & \ProgramDegreeLabel \\
 \Lang{Program Studi}{Study Program} & : & \StudyProgramName \\
-\Lang{Fakultas}{Faculty} & : & \Lang{Ilmu Komputer}{Computer Science} \\
+\Lang{Fakultas}{Faculty} & : & \FacultyLabel \\
 \end{tabular}
 \vspace{0.5cm}
 
-\noindent \Lang{Menyatakan bahwa dalam dokumen ilmiah \DocTypeName\ ini tidak terdapat bagian dari karya ilmiah lain yang telah diajukan untuk memperoleh gelar akademik di suatu lembaga pendidikan tinggi, dan juga tidak terdapat karya atau pendapat yang pernah ditulis atau diterbitkan oleh orang/lembaga lain, kecuali yang secara tertulis disitasi dalam dokumen ini dan disebutkan secara lengkap dalam daftar pustaka.}{Declare that this \DocTypeNameLower\ does not contain parts of another scientific work submitted to obtain an academic degree at any higher education institution, nor does it contain work or opinions written or published by other persons/institutions, except those properly cited and listed in the bibliography.}
+\noindent \Lang{Dengan ini saya menyatakan bahwa \DocTypeNameLower\ ini tidak mengandung bagian apa pun dari karya ilmiah lain yang telah diajukan untuk memperoleh gelar akademis di lembaga pendidikan tinggi mana pun. Selain itu, \DocTypeNameLower\ ini tidak mengandung karya atau pendapat yang sebelumnya ditulis atau diterbitkan oleh pihak lain, kecuali yang secara eksplisit dikutip dalam \DocTypeNameLower\ ini dan tercantum secara lengkap dalam daftar pustaka.}{Hereby declares that this \DocTypeNameLower\ contains no part of any other scientific work that has been submitted to obtain an academic degree at any higher education institution. Furthermore, it does not contain any work or opinions previously written or published by others, except for those which are explicitly cited in this thesis and listed completely in references.}
 
-\vspace{0.5cm}
-\noindent \Lang{Demikian surat pernyataan ini saya buat dengan sesungguhnya tanpa ada paksaan dari siapa pun juga dan untuk dipergunakan sebagaimana mestinya.}{This statement is made truthfully and without coercion for appropriate use.}
-\vspace{1cm}
-\begin{flushright}\Lang{Surabaya}{Surabaya}, \DefenseDate\\[0.3cm]\Lang{Yang Membuat Pernyataan,}{Declarant,}\\[2.5cm]{\underline \StudentName}\\\NpmLabel. \StudentID\end{flushright}
+\vspace{\baselineskip}\noindent \Lang{Saya juga menyatakan bahwa dokumen ilmiah ini bebas dari unsur-unsur plagiarisme. Jika di masa mendatang ditemukan indikasi plagiarisme dalam \DocTypeNameLower\ ini, saya bersedia menerima sanksi sesuai dengan peraturan perundang-undangan yang berlaku.}{And I declare that this scientific document is free from elements of plagiarism. If in the future indications of plagiarism are found in this Thesis, I am willing to accept sanctions in accordance with the applicable laws and regulations.}
 
-\halamanKosong
+\vspace{\baselineskip}\noindent \Lang{Dengan demikian, saya membuat pernyataan ini tanpa paksaan dari siapa pun dan untuk digunakan sebagaimana mestinya.}{Thus, I made this statement without any coercion from anyone and to be used as it should.}
+\par\vspace{1cm}
+\noindent\begin{minipage}[b]{0.45\linewidth}\centering
+  \ifthenelse{\equal{\OriginalityQRLink}{}}{}{\raisebox{\depth}{\qrcode[height=4.5cm]{\OriginalityQRLink}}}
+\end{minipage}\hfill
+\begin{minipage}[b]{0.5\linewidth}\raggedleft
+  \Lang{Surabaya}{Surabaya}, \SignDate\\[0.3cm]\DeclarantLabel\\[2.5cm]\underline{\StudentNameUpper}\\\NpmLabel. \StudentID
+\end{minipage}
+
+\ThesisBlankPage
+\fi
 
 % ── ABSTRAK
+% The identity table and the keywords line are single-spaced; the abstract text
+% uses the body spacing (\ThesisBodySpacing), as in the sample book.
 \chapter*{\Lang{ABSTRAK}{ABSTRACT}}
 \addcontentsline{toc}{chapter}{\Lang{ABSTRAK}{ABSTRACT}}
+\begingroup
+\singlespacing
 \noindent\begin{tabular}{@{} l c p{0.60\linewidth} @{}}
 \StudentNameLabel\ / \NpmLabel & : & \StudentName\ / \StudentID \\
 \ThesisTitleLabel & : & \ThesisTitle \\
 \Lang{Dosen Pembimbing}{Advisor} & : & 1. \AdvisorOne \\
  & & 2. \AdvisorTwo \\
 \end{tabular}
-\vspace{0.5cm}
+% \par closes the paragraph that holds the identity table first. Without it the
+% \vspace runs in horizontal mode and the gap lands after the first line of the
+% abstract instead of before it.
+\par\vspace{0.5cm}
+\ThesisBodySpacing
 \input{content/\ThesisLanguage/abstract}
-\vspace{0.5cm}
-
+\par\vspace{0.5cm}
+\singlespacing
 \noindent {\bfseries \Lang{Kata Kunci}{Keywords}}: \Lang{\KeywordsID}{\KeywordsEN}
+\par
+\endgroup
 
-\halamanKosong
+\ifThesisFull
+\ThesisBlankPage
 
 % ── KATA PENGANTAR
+\begingroup
+\ThesisBodySpacing
 \chapter*{\PrefaceLabel}
 \addcontentsline{toc}{chapter}{\PrefaceLabel}
 \input{content/\ThesisLanguage/preface}
-\vspace{1cm}
-\begin{flushright}Surabaya, \DefenseDate\\[2cm]\StudentName\\\end{flushright}
-\clearpage
+% Signature space. \needspace keeps the whole block on one page.
+\par\needspace{4.5cm}
+\begin{flushright}
+Surabaya, \SignDate\\[2.5cm]
+\StudentName
+\end{flushright}
+\endgroup
+\fi
+\ThesisPageBreak
 
 \fi

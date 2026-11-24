@@ -21,6 +21,7 @@
 \newcommand{\ThesisTitleUpper}{\MakeUppercase{\ThesisTitle}}
 \newcommand{\StudentNameUpper}{\MakeUppercase{\StudentName}}
 \newcommand{\DefenseDate}{\Lang{\DefenseDateID}{\DefenseDateEN}}
+\newcommand{\SignDate}{\Lang{\SignDateID}{\SignDateEN}}
 \newcommand{\StudyProgramName}{\Lang{\ProgramNameID}{\ProgramNameEN}}
 \newcommand{\StudyProgramPhrase}{\Lang{Program Studi \ProgramNameID}{\ProgramNameEN\ Study Program}}
 \newcommand{\DocTypeNameID}{\ifthesisdoctype Tesis\else Skripsi\fi}
@@ -32,19 +33,22 @@
 
 % Document labels
 \newcommand{\DocTypeLabel}{\DocTypeName}
-\newcommand{\AdvisorBlockLabel}{\Lang{DOSEN PEMBIMBING}{ADVISORS}}
+\newcommand{\AdvisorBlockLabel}{\Lang{DOSEN PEMBIMBING}{THESIS ADVISORS}}
 \newcommand{\MinistryLabel}{\Lang{KEMENTERIAN PENDIDIKAN TINGGI, SAINS, DAN TEKNOLOGI}{MINISTRY OF HIGHER EDUCATION, SCIENCE, AND TECHNOLOGY}}
 \newcommand{\UniversityLabel}{\Lang{UNIVERSITAS PEMBANGUNAN NASIONAL VETERAN JAWA TIMUR}{UNIVERSITAS PEMBANGUNAN NASIONAL VETERAN JAWA TIMUR}}
 \newcommand{\FacultyLabel}{\Lang{Fakultas Ilmu Komputer}{Faculty of Computer Science}}
 \newcommand{\ProgramLabel}{\MakeUppercase{\StudyProgramPhrase}}
 \newcommand{\ApprovalSheetLabel}{\Lang{LEMBAR PENGESAHAN}{APPROVAL SHEET}}
-% LEMBAR PENGESAHAN (tim penguji) dan LEMBAR PERSETUJUAN (koordinator program
-% studi) adalah dua halaman berbeda, sehingga judul Inggrisnya juga dibedakan.
-\newcommand{\AcceptanceSheetLabel}{\Lang{LEMBAR PERSETUJUAN}{CONSENT SHEET}}
-\newcommand{\PlagiarismStatementLabel}{\Lang{SURAT PERNYATAAN BEBAS PLAGIASI}{STATEMENT OF ORIGINALITY}}
+% Judul dan teks halaman tanda tangan mengikuti buku skripsi contoh fakultas
+% tahun 2026. Edisi Inggris buku contoh memberi judul APPROVAL SHEET pada
+% LEMBAR PENGESAHAN maupun LEMBAR PERSETUJUAN, sehingga keduanya disamakan.
+\newcommand{\AcceptanceSheetLabel}{\Lang{LEMBAR PERSETUJUAN}{APPROVAL SHEET}}
+\newcommand{\PlagiarismStatementLabel}{\Lang{PERNYATAAN ORISINALITAS}{STATEMENT OF ORIGINALITY}}
 \newcommand{\PrefaceLabel}{\Lang{KATA PENGANTAR}{ACKNOWLEDGEMENTS}}
-\newcommand{\AbbreviationListLabel}{\Lang{DAFTAR SINGKATAN}{LIST OF ABBREVIATIONS}}
-\newcommand{\GlossaryListLabel}{\Lang{GLOSARIUM}{GLOSSARY}}
+% DAFTAR ISTILAH memuat istilah khusus sekaligus singkatan beserta
+% kepanjangannya, sehingga tidak ada DAFTAR SINGKATAN tersendiri.
+\newcommand{\GlossaryListLabel}{\Lang{DAFTAR ISTILAH}{GLOSSARY}}
+\newcommand{\SymbolListLabel}{\Lang{DAFTAR SIMBOL}{LIST OF SYMBOLS}}
 \newcommand{\AppendixLabel}{\Lang{LAMPIRAN}{APPENDIX}}
 \newcommand{\AppendixListLabel}{\Lang{DAFTAR LAMPIRAN}{LIST OF APPENDICES}}
 \newcommand{\BibliographyLabel}{\Lang{DAFTAR PUSTAKA}{BIBLIOGRAPHY}}
@@ -58,9 +62,13 @@
 \newcommand{\AdvisorOneRole}{\Lang{Pembimbing I}{Advisor I}}
 \newcommand{\AdvisorTwoRole}{\Lang{Pembimbing II}{Advisor II}}
 \newcommand{\ExaminerOneRole}{\Lang{Ketua Penguji}{Head Assessor}}
-\newcommand{\ExaminerTwoRole}{\Lang{Anggota Penguji}{Assessor I}}
-\newcommand{\AgreeLabel}{\Lang{Menyetujui,}{Approved by,}}
-\newcommand{\KnowLabel}{\Lang{Mengetahui,}{Acknowledged by,}}
+\newcommand{\ExaminerTwoRole}{\Lang{Penguji I}{Assessor I}}
+% Kata-kata di atas blok tanda tangan. "Acknowledge by" disalin apa adanya dari
+% edisi Inggris buku skripsi contoh.
+\newcommand{\ApprovedLabel}{\Lang{Disetujui,}{Approved,}}
+\newcommand{\EndorsedByLabel}{\Lang{Disahkan oleh,}{Acknowledge by,}}
+\newcommand{\ApprovedByLabel}{\Lang{Disetujui oleh,}{Approved by,}}
+\newcommand{\DeclarantLabel}{\Lang{Menyatakan,}{Declarant,}}
 \newcommand{\DeanRoleLabel}{\Lang{Dekan Fakultas Ilmu Komputer}{Dean of the Faculty of Computer Science}}
 \newcommand{\HeadProgramRoleLabel}{\Lang{Koordinator \StudyProgramPhrase}{Coordinator of \StudyProgramPhrase}}
 \newcommand{\StudentNameLabel}{\Lang{Nama Mahasiswa}{Student Name}}
@@ -85,6 +93,8 @@
   \providecommand{\listalgorithmcfname}{}%
   \renewcommand{\algorithmcfname}{\Lang{Algoritma}{Algorithm}}%
   \renewcommand{\listalgorithmcfname}{\Lang{DAFTAR ALGORITMA}{LIST OF ALGORITHMS}}%
+  % Pseudocode berbahasa Inggris tidak menampilkan titik koma di akhir baris.
+  \ifthesisenglish\ifdefined\DontPrintSemicolon\DontPrintSemicolon\fi\fi
 }
 
 % Document-type wording printed on the cover. Each driver selects one through

@@ -4,18 +4,18 @@
 % -----------------------------------------------------------------------------
 % Which lists appear depends on \ThesisTarget:
 %
-%                        proposal   draft   full
-%   DAFTAR ISI              yes      yes     yes
-%   DAFTAR GAMBAR           yes      yes     yes
-%   DAFTAR TABEL            yes      yes     yes
-%   DAFTAR ALGORITMA         -       yes     yes
-%   DAFTAR LAMPIRAN          -       yes     yes
-%   GLOSARIUM               yes      yes     yes
-%   DAFTAR SINGKATAN         -        -      yes
+%                        proposal   draft   semhas   full
+%   DAFTAR ISI              yes      yes     yes      yes
+%   DAFTAR GAMBAR           yes      yes     yes      yes
+%   DAFTAR TABEL            yes      yes     yes      yes
+%   DAFTAR ALGORITMA         -       yes     yes      yes
+%   DAFTAR LAMPIRAN          -       yes     yes      yes
+%   DAFTAR ISTILAH          yes      yes     yes      yes
+%   DAFTAR SIMBOL           yes      yes     yes      yes
 %
 % The proposal has no Bab IV and no appendix, so the two lists that describe
-% them are omitted rather than printed empty. Proposal and draft fold the
-% abbreviations into the glossary to keep the front matter to one page.
+% them are omitted rather than printed empty. There is no separate DAFTAR
+% SINGKATAN: abbreviations and their expansions belong in DAFTAR ISTILAH.
 
 % Dot leaders for every list, and an unnumbered chapter heading: these pages are
 % titled DAFTAR ISI, not "BAB I DAFTAR ISI". \ApplyMainChapterStyle puts the
@@ -32,9 +32,9 @@
 \renewcommand{\cftchappresnum}{\ContentsPrefix}
 \newlength{\mylen}\settowidth{\mylen}{\bfseries \ContentsPrefix VIII}\setlength{\cftchapnumwidth}{\mylen}
 
-\phantomsection\tableofcontents\clearpage
-\phantomsection\addcontentsline{toc}{chapter}{\listfigurename}\listoffigures\clearpage
-\phantomsection\addcontentsline{toc}{chapter}{\listtablename}\listoftables\clearpage
+\phantomsection\tableofcontents\ThesisPageBreak
+\phantomsection\addcontentsline{toc}{chapter}{\listfigurename}\listoffigures\ThesisPageBreak
+\phantomsection\addcontentsline{toc}{chapter}{\listtablename}\listoftables\ThesisPageBreak
 
 \ifThesisProposal\else
   % Entri Daftar Algoritma ditulis "Algoritma 4. 1 ..." dengan menambal
@@ -48,25 +48,28 @@
     \renewcommand{\numberline}[1]{\OriginalNumberline{\algorithmcfname\ #1}}
     \listofalgorithms
   \endgroup
-  \clearpage
-  \phantomsection\addcontentsline{toc}{chapter}{\AppendixListLabel}\listofappendices\clearpage
+  \ThesisPageBreak
+  \phantomsection\addcontentsline{toc}{chapter}{\AppendixListLabel}\listofappendices\ThesisPageBreak
 \fi
 
-% Glosarium memuat istilah khusus beserta singkatannya.
-\phantomsection\addcontentsline{toc}{chapter}{\GlossaryListLabel}
+% DAFTAR ISTILAH: istilah khusus beserta singkatan dan kepanjangannya.
+\phantomsection
 \chapter*{\GlossaryListLabel}
+\addcontentsline{toc}{chapter}{\GlossaryListLabel}
 \input{content/\ThesisLanguage/glossary}
-\clearpage
+\ThesisPageBreak
 
-\ifThesisFull
-  \chapter*{\AbbreviationListLabel}
-  \addcontentsline{toc}{chapter}{\AbbreviationListLabel}
-  \input{content/\ThesisLanguage/abbreviations}
-  \clearpage
-\fi
+% DAFTAR SIMBOL: notasi inti yang dipakai lintas bab.
+\phantomsection
+\chapter*{\SymbolListLabel}
+\addcontentsline{toc}{chapter}{\SymbolListLabel}
+\input{content/\ThesisLanguage/symbols}
+\ThesisPageBreak
 
-% Back to numbered chapters, main-matter margins, and arabic page numbers.
+% Back to numbered chapters, main-matter margins, arabic page numbers, and the
+% body line spacing. The lists above keep 1.5 spacing.
 \ApplyMainChapterStyle
 \mainmattergeometry
 \pagenumbering{arabic}
 \setcounter{page}{1}
+\ThesisBodySpacing

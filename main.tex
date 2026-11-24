@@ -4,17 +4,27 @@
 %         ./build.sh skripsi   (Linux, macOS, WSL)
 % Manual: pdflatex -> bibtex -> pdflatex -> pdflatex
 %
-% Memuat sampul, lembar pengesahan, lembar persetujuan, surat pernyataan bebas
-% plagiasi, abstrak, kata pengantar, seluruh daftar, Bab I sampai Bab V, daftar
-% pustaka, dan lampiran.
+% Edisi layar (satu sisi). Memuat sampul luar oranye, sampul dalam, lembar
+% pengesahan, lembar persetujuan, pernyataan orisinalitas, abstrak, kata
+% pengantar, seluruh daftar, Bab I sampai Bab V, daftar pustaka, dan lampiran.
+%
+% Edisi lain dari naskah yang sama:
+%   main-cetak.tex     cetak bolak-balik    (build cetak)
+%   main-en.tex        bahasa Inggris       (build en)
+%   main-en-cetak.tex  Inggris, bolak-balik (build en-cetak)
+%   semhas.tex         seminar hasil        (build semhas)
+% Keempat berkas itu hanya menetapkan satu atau dua nilai lalu memuat berkas
+% ini, sehingga seluruh edisi selalu berisi naskah yang sama.
 %
 % Isi bab diambil dari chapters/<bahasa>/. Naskah proposal (proposal.tex) dan
 % naskah draf (skripsi-draft.tex) memakai berkas bab yang sama, hanya lebih
 % sedikit, sehingga tidak ada isi yang perlu disalin antar naskah.
 % -----------------------------------------------------------------------------
-\documentclass{template}
+% \ThesisClassOptions is "print" in the print drivers and empty otherwise.
+\providecommand{\ThesisClassOptions}{}
+\expandafter\documentclass\expandafter[\ThesisClassOptions]{template}
 
-\newcommand{\ThesisTarget}{full}
+\providecommand{\ThesisTarget}{full}
 \input{config/thesis-preamble}
 
 \begin{document}

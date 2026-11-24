@@ -1,0 +1,12 @@
+% main-cetak.tex -- Naskah skripsi penuh, edisi cetak bolak-balik.
+% -----------------------------------------------------------------------------
+% Build:  build cetak        (Windows)
+%         ./build.sh cetak   (Linux, macOS, WSL)
+%
+% Isi sama persis dengan main.tex. Bedanya hanya tata letak cetak dua sisi:
+% setiap bab dan setiap halaman depan dimulai pada halaman kanan, margin 4 cm
+% selalu berada di sisi jilid, dan halaman kosong pengisi diberi keterangan
+% "Halaman ini sengaja dikosongkan". Sampul luar oranye tetap satu sisi.
+% -----------------------------------------------------------------------------
+\newcommand{\ThesisClassOptions}{print}
+\input{main}

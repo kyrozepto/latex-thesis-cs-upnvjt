@@ -1,6 +1,12 @@
+# Built manuscripts in the repository root (main.pdf, proposal.pdf, main-cetak.pdf,
+# ...). Each student builds their own. The two template-preview-*.pdf files stay
+# tracked to show what the template produces. PDFs in figures/ are not affected:
+# rendered TikZ figures are committed so the build works without tikz/.
+# To keep your own manuscript PDF in your fork, delete the /*.pdf line below.
+/*.pdf
+!/template-preview-*.pdf
+
 # LaTeX build artifacts.
-# PDFs are deliberately NOT ignored: the repository ships template-preview-*.pdf,
-# and most people want their own proposal.pdf or main.pdf under version control.
 *.aux
 *.bbl
 *.blg
@@ -25,3 +31,7 @@ texput.log
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Output of tools/siapkan_cetak.py.
+siap_cetak_*/
+__pycache__/

@@ -1,15 +1,59 @@
 \appendix
-\clearpage
+\ThesisPageBreak
 \phantomsection
 \addcontentsline{toc}{chapter}{\AppendixLabel}
 \chapter*{\AppendixLabel}
 
-\TemplateTodo{Use the appendix for supporting materials that are too long for the main chapters, such as research instruments, experiment configurations, interview transcripts, test evidence, or additional documentation.}
+% Separate appendix numbering from main chapter numbering so supporting tables
+% and figures do not continue Chapter IV counters: Table A.1, Figure A.1, and so
+% on.
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\renewcommand{\thetable}{A.\arabic{table}}
+\renewcommand{\thefigure}{A.\arabic{figure}}
 
-Appendices should still be referenced from the main chapters. Do not include materials that are never mentioned in the manuscript.
+\TemplateTodo{Use the appendix for supporting materials that are too long for the main chapters, such as research instruments, experiment configurations, complete result tables, test evidence, ethics documents, or data validation forms.}
 
-\AppendixSection{Appendix A. Example Appendix}
+Write one introductory paragraph that names the content of every appendix. Each appendix must be referenced from the main chapters; do not include material that is never mentioned in the manuscript.
+
+% Appendix format:
+%   - \AppendixSection{Appendix 1. Title}, Appendix 2, and so on: appendices are
+%     numbered, not lettered. The second and later appendices start on a new
+%     page automatically.
+%   - \AppendixSubsection{Title} without a number.
+%   - Both are listed in the LIST OF APPENDICES, not the TABLE OF CONTENTS.
+%   - A \label right after either can be cited from the chapters with \nameref,
+%     which prints the title: "Appendix \nameref{sec:appendix-example}".
+
+\AppendixSection{Appendix 1. Example Appendix}\label{sec:appendix-example}
 Write appendix content here. If the appendix contains code, data, or images, ensure sensitive information has been removed before publishing the repository.
 
-\AppendixSubsection{A.1 Example Appendix Subsection}
-Add appendix details here when needed.
+\AppendixSubsection{Example Appendix Subsection}\label{sec:appendix-example-sub}
+Supporting detail is shown in Table \ref{tab:appendix-example}.
+
+\begin{longtable}{|l|c|c|}
+\caption{Example appendix table.}\label{tab:appendix-example}\\
+\hline
+Configuration & Metric 1 & Metric 2 \\
+\hline
+\endfirsthead
+\hline
+Configuration & Metric 1 & Metric 2 \\
+\hline
+\endhead
+\hline
+\endlastfoot
+Configuration A & 0.00 & 0.00 \\
+\hline
+Configuration B & 0.00 & 0.00 \\
+\end{longtable}
+
+\AppendixSection{Appendix 2. Supporting Documents}\label{sec:appendix-documents}
+Scanned documents, such as an ethics clearance letter or a data validation form, are inserted as framed images.
+
+\begin{figure}[H]
+\centering
+\BorderedGraphics[width=0.6\linewidth]{example-figure.pdf}
+\caption{Example scan of a supporting document.}
+\label{fig:appendix-documents}
+\end{figure}

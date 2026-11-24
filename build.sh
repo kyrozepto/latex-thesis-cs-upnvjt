@@ -10,16 +10,20 @@
 #   ./build.sh            -> proposal (default)
 #   ./build.sh proposal   -> proposal.tex       Bab I-III
 #   ./build.sh draft      -> skripsi-draft.tex  Bab I-IV
-#   ./build.sh skripsi    -> main.tex           Bab I-V, naskah akhir
+#   ./build.sh semhas     -> semhas.tex         Bab I-V, seminar hasil
+#   ./build.sh skripsi    -> main.tex           Bab I-V, naskah akhir (layar)
 #   ./build.sh main       -> alias of "skripsi"
-#   ./build.sh all        -> all three
+#   ./build.sh cetak      -> main-cetak.tex     naskah akhir, cetak bolak-balik
+#   ./build.sh en         -> main-en.tex        naskah akhir, bahasa Inggris
+#   ./build.sh en-cetak   -> main-en-cetak.tex  bahasa Inggris, cetak bolak-balik
+#   ./build.sh all        -> every target above
 #   ./build.sh clean      -> remove aux files (keeps PDFs)
 set -u
 
 cd "$(dirname "$0")"
 
 OPTS="-interaction=nonstopmode -halt-on-error -file-line-error"
-TARGETS="proposal skripsi-draft main"
+TARGETS="proposal skripsi-draft semhas main main-cetak main-en main-en-cetak"
 # .loa belongs to algorithm2e (Daftar Algoritma) and .lap to the template's own
 # Daftar Lampiran. Both have to go, or a stale list survives the rebuild.
 EXTS="aux bbl blg fdb_latexmk fls lof log lot loa lap out toc"
@@ -70,11 +74,14 @@ case "$target" in
     ;;
   draft)   target=skripsi-draft ;;
   skripsi) target=main ;;
+  cetak|print) target=main-cetak ;;
+  en|english) target=main-en ;;
+  en-cetak|en-print) target=main-en-cetak ;;
 esac
 
 if [ ! -f "$target.tex" ]; then
   echo "Unknown target \"$1\"."
-  echo "Valid targets: proposal, draft, skripsi, all, clean"
+  echo "Valid targets: proposal, draft, semhas, skripsi, cetak, en, en-cetak, all, clean"
   exit 1
 fi
 

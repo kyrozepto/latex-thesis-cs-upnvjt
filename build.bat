@@ -10,9 +10,13 @@ REM Usage:
 REM   build            -> proposal (default)
 REM   build proposal   -> proposal.tex       Bab I-III
 REM   build draft      -> skripsi-draft.tex  Bab I-IV
-REM   build skripsi    -> main.tex           Bab I-V, naskah akhir
+REM   build semhas     -> semhas.tex         Bab I-V, seminar hasil
+REM   build skripsi    -> main.tex           Bab I-V, naskah akhir (layar)
 REM   build main       -> alias of "build skripsi"
-REM   build all        -> all three
+REM   build cetak      -> main-cetak.tex     naskah akhir, cetak bolak-balik
+REM   build en         -> main-en.tex        naskah akhir, bahasa Inggris
+REM   build en-cetak   -> main-en-cetak.tex  bahasa Inggris, cetak bolak-balik
+REM   build all        -> every target above
 REM   build clean      -> remove aux files (keeps PDFs)
 
 setlocal
@@ -25,10 +29,16 @@ if /i "%TARGET%"=="clean"   goto :clean
 if /i "%TARGET%"=="all"     goto :all
 if /i "%TARGET%"=="draft"   set TARGET=skripsi-draft
 if /i "%TARGET%"=="skripsi" set TARGET=main
+if /i "%TARGET%"=="cetak"    set TARGET=main-cetak
+if /i "%TARGET%"=="print"    set TARGET=main-cetak
+if /i "%TARGET%"=="en"       set TARGET=main-en
+if /i "%TARGET%"=="english"  set TARGET=main-en
+if /i "%TARGET%"=="en-cetak" set TARGET=main-en-cetak
+if /i "%TARGET%"=="en-print" set TARGET=main-en-cetak
 
 if not exist "%TARGET%.tex" (
   echo Unknown target "%1".
-  echo Valid targets: proposal, draft, skripsi, all, clean
+  echo Valid targets: proposal, draft, semhas, skripsi, cetak, en, en-cetak, all, clean
   exit /b 1
 )
 
@@ -38,13 +48,17 @@ exit /b %ERRORLEVEL%
 :all
 call :build proposal       || exit /b 1
 call :build skripsi-draft  || exit /b 1
+call :build semhas         || exit /b 1
 call :build main           || exit /b 1
+call :build main-cetak     || exit /b 1
+call :build main-en        || exit /b 1
+call :build main-en-cetak  || exit /b 1
 exit /b 0
 
 :clean
 REM .loa belongs to algorithm2e (Daftar Algoritma) and .lap to the template's
 REM own Daftar Lampiran. Both have to go, or a stale list survives the rebuild.
-for %%T in (proposal skripsi-draft main) do (
+for %%T in (proposal skripsi-draft semhas main main-cetak main-en main-en-cetak) do (
   for %%E in (aux bbl blg fdb_latexmk fls lof log lot loa lap out toc) do (
     if exist "%%T.%%E" del /q "%%T.%%E"
   )

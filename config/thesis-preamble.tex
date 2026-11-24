@@ -9,12 +9,16 @@
 %
 % The driver declares its target before inputting this file:
 %
-%   \newcommand{\ThesisTarget}{proposal}   % proposal | draft | full
+%   \newcommand{\ThesisTarget}{proposal}   % proposal | draft | semhas | full
 %   \input{config/thesis-preamble}
 %
 %   proposal -> Bab I-III, no algorithm2e, no list of algorithms/appendices
 %   draft    -> Bab I-IV, adds algorithm2e and both lists, adds the appendix
+%   semhas   -> Bab I-V for the results seminar (seminar hasil): abstract and
+%               every list, but no signature sheets, statement, or preface
 %   full     -> Bab I-V, adds all signature sheets, abstract, and preface
+%
+% The print edition is chosen separately, with \documentclass[print]{template}.
 % -----------------------------------------------------------------------------
 
 \providecommand{\ThesisTarget}{full}
@@ -22,14 +26,20 @@
 \usepackage{ifthen}
 \newif\ifThesisProposal
 \newif\ifThesisDraft
+\newif\ifThesisSemhas
 \newif\ifThesisFull
 \ifthenelse{\equal{\ThesisTarget}{proposal}}{\ThesisProposaltrue}{}
 \ifthenelse{\equal{\ThesisTarget}{draft}}{\ThesisDrafttrue}{}
+\ifthenelse{\equal{\ThesisTarget}{semhas}}{\ThesisSemhastrue}{}
 \ifthenelse{\equal{\ThesisTarget}{full}}{\ThesisFulltrue}{}
-\ifThesisProposal\else\ifThesisDraft\else\ifThesisFull\else
+\ifThesisProposal\else\ifThesisDraft\else\ifThesisSemhas\else\ifThesisFull\else
   \ClassError{template}{Unknown \string\ThesisTarget: \ThesisTarget}%
-    {Set \string\ThesisTarget\space to proposal, draft, or full.}%
-\fi\fi\fi
+    {Set \string\ThesisTarget\space to proposal, draft, semhas, or full.}%
+\fi\fi\fi\fi
+% semhas and full share Bab V, the abstract, and the full set of lists.
+\newif\ifThesisComplete
+\ifThesisSemhas\ThesisCompletetrue\fi
+\ifThesisFull\ThesisCompletetrue\fi
 
 % ── Mathematics
 \usepackage{amsmath,amsfonts}
@@ -40,7 +50,8 @@
 % ── Graphics and floats
 \usepackage{graphicx}
 \usepackage{float}
-\graphicspath{{figures/}}
+% \needspace{<length>} keeps a block (for example a signature) on one page.
+\usepackage{needspace}
 
 % ── Tables
 \usepackage{longtable}
@@ -60,7 +71,8 @@
 % Naskah proposal tidak memuat algorithm2e: penyajian algoritma ditempatkan pada
 % Bab IV, yang baru hadir pada naskah draf dan naskah skripsi penuh.
 \ifThesisProposal\else
-  \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+  % boxruled: the whole algorithm, caption included, sits inside one frame.
+  \usepackage[boxruled,vlined,linesnumbered]{algorithm2e}
 \fi
 
 % ── Source listings
@@ -77,6 +89,8 @@
 % agar definisi \@citex miliknya tidak ditimpa kembali.
 \usepackage[nocompress]{cite}
 \renewcommand{\citepunct}{],[}
+% URL dan DOI pada daftar pustaka dicetak dengan huruf teks, bukan monospace.
+\urlstyle{same}
 
 % ── Cover typeface and diagrams
 \usepackage{helvet}
@@ -90,6 +104,19 @@
 % -----------------------------------------------------------------------------
 \input{config/thesis-config}
 \input{config/thesis-language}
+
+% English figures (diagrams with English labels) go in figures/english/ under
+% the same file name; anything not found there falls back to figures/.
+\ifthesisenglish
+  \graphicspath{{figures/english/}{figures/}}
+\else
+  \graphicspath{{figures/}}
+\fi
+
+% Orange outer cover, see \ThesisColorCover in config/thesis-config.tex.
+\newif\ifThesisColorCover
+\ifthenelse{\equal{\ThesisColorCover}{on}}{\ThesisColorCovertrue}{}
+\ifthenelse{\equal{\ThesisColorCover}{auto}}{\ifThesisFull\ThesisColorCovertrue\fi}{}
 
 % ── Localized pseudocode keywords
 \ifThesisProposal\else

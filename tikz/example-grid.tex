@@ -1,0 +1,34 @@
+% example-grid.tex -- contoh \gridmat dan \window dari preamble.tex.
+%
+% Menggambar masukan 5x5 dengan jendela kernel 3x3 yang disorot, kernelnya,
+% dan satu nilai keluaran. Pola yang sama dipakai untuk konvolusi, pooling,
+% padding, atau perhitungan manual lain yang menampilkan nilai per sel.
+%
+% Dirender menjadi ../figures/example-grid.pdf oleh build.sh / build.bat.
+\documentclass[border=2pt]{standalone}
+\input{preamble}
+
+\begin{document}
+\begin{tikzpicture}
+  \def\s{0.6}
+  % Masukan 5x5, jendela 3x3 mulai kolom 1, baris 1 (0-basis).
+  \gridmat{\s}{}{{{1,0,2,1,0},{0,1,3,1,2},{2,1,0,0,1},{1,3,1,2,0},{0,2,1,0,1}}}
+  \window{\s}{1}{1}{3}{draw=aksen, line width=1.2pt}
+  \node[font=\small, anchor=north] [yshift=-1mm] at (2.5*\s, -5*\s) {Masukan};
+
+  % Kernel 3x3 di sebelah kanan.
+  \begin{scope}[xshift=4.2cm, yshift=-0.6cm]
+    \gridmat{\s}{selaksen}{{{1,0,-1},{1,0,-1},{1,0,-1}}}
+    \node[font=\small, anchor=north] [yshift=-1mm] at (1.5*\s, -3*\s) {Kernel};
+  \end{scope}
+
+  % Satu nilai keluaran: jumlah hasil kali jendela dengan kernel, (1-1)+(1-0)+(3-2) = 2.
+  \begin{scope}[xshift=7cm, yshift=-1.2cm]
+    \gridmat{\s}{seldua}{{{2}}}
+    \node[font=\small, anchor=north] [yshift=-1mm] at (0.5*\s, -\s) {Keluaran};
+  \end{scope}
+
+  \draw[panahaksen] (3.2, -1.5) -- (4.1, -1.5);
+  \draw[panah] (6.1, -1.5) -- (6.9, -1.5);
+\end{tikzpicture}
+\end{document}
