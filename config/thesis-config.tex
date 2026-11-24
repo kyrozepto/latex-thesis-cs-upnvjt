@@ -4,9 +4,12 @@
 % -----------------------------------------------------------------------------
 % Change only this value to switch labels and selected content folders.
 % The template loads files from content/<language>, chapters/<language>,
-% and appendices/<language>.
+% and appendices/<language>. Figures are looked up in figures/english/ first
+% when the language is english, then in figures/.
 % Valid values: indonesian, english
-\newcommand{\ThesisLanguage}{indonesian}
+% \providecommand lets the English drivers (main-en.tex, main-en-cetak.tex)
+% set the language before this file is read, without editing it here.
+\providecommand{\ThesisLanguage}{indonesian}
 
 % Change this value to choose the document type.
 % Valid values: skripsi, tesis
@@ -15,7 +18,8 @@
 
 % Visibility of the writing-guide boxes (\TemplateTip, \TemplateTodo) and the
 % draft markers (\Placeholder, \FigurePlaceholder).
-%   auto -> shown in main.tex, hidden in proposal.tex and skripsi-draft.tex
+%   auto -> shown in main.tex and its print/English drivers, hidden in
+%           proposal.tex, skripsi-draft.tex, and semhas.tex
 %   on   -> always shown
 %   off  -> always hidden (use this for the final submitted manuscript)
 % When hidden, \FigurePlaceholder collapses to nothing but the surrounding
@@ -38,18 +42,36 @@
 \newcommand{\AdvisorTwoID}{NIP/NPT. \makebox[4cm]{\dotfill}}
 \newcommand{\ExaminerOne}{Nama Ketua Penguji, Gelar}
 \newcommand{\ExaminerOneID}{NIP/NPT. \makebox[4cm]{\dotfill}}
-\newcommand{\ExaminerTwo}{Nama Anggota Penguji, Gelar}
+\newcommand{\ExaminerTwo}{Nama Penguji I, Gelar}
 \newcommand{\ExaminerTwoID}{NIP/NPT. \makebox[4cm]{\dotfill}}
 
 % Official metadata retained from the supplied template. Verify with the latest
 % faculty/program guide before official submission.
 \newcommand{\DeanName}{Nama Dekan Fakultas, Gelar}
 \newcommand{\DeanID}{NIP./NPT. \makebox[4cm]{\dotfill}}
-\newcommand{\HeadOfProgramName}{Nama Kepala Program Studi, Gelar}
+\newcommand{\HeadOfProgramName}{Nama Koordinator Program Studi, Gelar}
 \newcommand{\HeadOfProgramID}{NIP./NPT. \makebox[4cm]{\dotfill}}
 
 \newcommand{\DefenseDateID}{Tanggal Bulan Tahun}
 \newcommand{\DefenseDateEN}{Month Day, Year}
+% Signing date of PERNYATAAN ORISINALITAS and KATA PENGANTAR. It is usually a
+% few days after the defense, once revisions are done.
+\newcommand{\SignDateID}{Tanggal Bulan Tahun}
+\newcommand{\SignDateEN}{Month Day, Year}
+
+% Link encoded as the QR code beside the signature on PERNYATAAN ORISINALITAS,
+% as in the faculty sample book. Point it at the supporting files the study
+% program asks for, for example a shared folder. Leave the braces empty to
+% omit the QR code.
+\newcommand{\OriginalityQRLink}{https://example.com/ganti-dengan-tautan-berkas-pendukung}
+
 \newcommand{\SubmissionYear}{2026}
 \newcommand{\KeywordsID}{kata kunci pertama, kata kunci kedua, kata kunci ketiga}
 \newcommand{\KeywordsEN}{first keyword, second keyword, third keyword}
+
+% Orange outer cover printed before the white inner cover.
+%   auto -> only in the final manuscript (main.tex and its print/English drivers)
+%   on   -> every manuscript
+%   off  -> never (use for files that only need the white cover)
+% \providecommand lets a driver override it, for example a *-nocover driver.
+\providecommand{\ThesisColorCover}{auto}

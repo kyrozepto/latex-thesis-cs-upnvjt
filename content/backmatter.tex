@@ -6,19 +6,23 @@
 % so the "BAB " prefix is stripped from every TOC entry written from here on.
 % This is done through the .toc file rather than directly, because the entries
 % are read back on the next run.
-\clearpage
+\ThesisPageBreak
 \phantomsection
 \addtocontents{toc}{\protect\renewcommand{\protect\cftchappresnum}{}}
 \addtocontents{toc}{\protect\setlength{\protect\cftchapnumwidth}{0pt}}
 \addcontentsline{toc}{chapter}{\BibliographyLabel}
-\bibliographystyle{unsrt}
+% IEEE style with DOIs: IEEEtran-doi.bst, a renamed and modified copy of
+% IEEEtran.bst 1.14 (see its header). It prints "doi: ..." when the entry has a
+% doi field and "Accessed: ... [Online]. Available: <url>" otherwise, and
+% shortens author lists longer than six to "et al.".
+\bibliographystyle{IEEEtran-doi}
 % Add more .bib files as a comma-separated list, without the .bib extension:
 % \bibliography{references/example,references/another}
 \bibliography{references/example}
 
 % Naskah proposal belum memuat lampiran.
 \ifThesisProposal\else
-  \clearpage
+  \ThesisPageBreak
   % Lampiran hanya tampil sebagai satu entri LAMPIRAN di Daftar Isi; rinciannya
   % dicatat pada Daftar Lampiran lewat \AppendixSection dan \AppendixSubsection.
   \setcounter{tocdepth}{0}

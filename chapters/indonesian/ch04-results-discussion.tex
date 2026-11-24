@@ -1,6 +1,11 @@
 \chapter{Hasil dan Pembahasan}
 
-\section{Hasil Implementasi atau Pelaksanaan Penelitian}
+% Setiap bab dibuka dengan satu paragraf pengantar sebelum subbab pertama:
+% apa yang dibahas bab ini dan bagaimana urutan subbabnya.
+\TemplateTodo{Tulis satu paragraf pembuka yang menjelaskan isi bab ini dan urutan subbabnya.}
+
+
+\section{Lingkungan dan Pelaksanaan Penelitian}
 \TemplateTodo{Laporkan apa yang benar-benar berhasil dibuat, dikumpulkan, atau dijalankan. Pisahkan hasil faktual dari interpretasi.}
 
 % Pseudocode ditempatkan di Bab IV, bukan Bab III, karena yang dilaporkan adalah
@@ -16,7 +21,8 @@
 \caption{Contoh format algoritma penelitian}\label{alg:contoh}
 \KwInput{Data atau masukan penelitian}
 \KwOutput{Hasil yang dievaluasi}
-Lakukan tahap persiapan data\;
+Lakukan tahap persiapan data \tcp*{pengganti \textbackslash;}
+\tcp{Komentar satu baris penuh ditulis dengan \textbackslash tcp}
 Terapkan metode yang diusulkan\;
 \ForEach{skenario pengujian}{
   Evaluasi keluaran menggunakan metrik yang sesuai\;
@@ -94,8 +100,55 @@ A1a & Model usulan & Parameter yang diubah & Nilai pertama & 0,00 & 0,00 \\
 A1b & & & Nilai kedua & 0,00 & 0,00 \\
 \end{xltabular}\endgroup
 
-\section{Pembahasan}
+% CONTOH GAMBAR BERPANEL DARI BEBERAPA BERKAS
+%
+% Bila setiap panel berasal dari berkas gambar tersendiri, letakkan setiap
+% berkas di dalam minipage[t] dan tulis keterangan (a), (b), ... di bawahnya.
+% Seluruh panel tetap berbagi satu nomor dan satu caption, tanpa paket
+% subcaption. Lebar minipage yang sebaris dijumlahkan sedikit di bawah
+% \linewidth; \hfill membagi sisa ruangnya, dan \\[6pt] memulai baris panel
+% berikutnya.
+%
+% \caption[judul pendek]{judul lengkap} memisahkan judul yang tercetak di
+% DAFTAR GAMBAR dari judul panjang di bawah gambar, agar daftar tetap rapi.
+%
+% \BorderedGraphics (template.cls) memberi bingkai tipis, dipakai untuk
+% tangkapan layar dan pindaian dokumen yang berlatar putih.
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.485\linewidth}
+\centering
+\includegraphics[width=\linewidth]{example-figure.pdf}
+\vspace{4pt}
+\small\textbf{(a)} Keterangan panel pertama.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.485\linewidth}
+\centering
+\BorderedGraphics[width=\linewidth]{example-figure.pdf}
+\vspace{4pt}
+\small\textbf{(b)} Panel kedua, misalnya tangkapan layar berbingkai.
+\end{minipage}
+\caption[Contoh gambar berpanel dari dua berkas]{Contoh gambar berpanel dari dua berkas gambar, dengan judul lengkap yang lebih panjang daripada entri di Daftar Gambar.}
+\label{fig:contoh-minipage}
+\end{figure}
+
+Panel (a) dan (b) pada Gambar~\ref{fig:contoh-minipage} dirujuk dari teks dengan huruf panelnya.
+
+\section{Pembahasan}\label{sec:ch4-pembahasan}
 \TemplateTodo{Jelaskan mengapa hasil tersebut terjadi, hubungannya dengan teori dan penelitian terdahulu, serta implikasinya. Jangan hanya mengulang isi tabel.}
 
-\section{Keterbatasan Penelitian}
+% Rujukan ke subbab ditulis dengan judulnya, bukan nomornya:
+% "Subbab \nameref{label}". \nameref mencetak judul subbab yang diberi \label,
+% sehingga rujukan tetap benar ketika subbab berpindah nomor.
+% Lampiran dirujuk dengan nomornya, "Lampiran 1", dan tabel atau gambar di
+% dalamnya dengan \ref seperti biasa (Tabel L.1).
+Rincian konfigurasi eksperimen dilaporkan pada Tabel \ref{tab:lampiran-contoh} di Lampiran 1, sedangkan keterbatasannya dibahas pada Subbab \nameref{sec:ch4-keterbatasan}.
+
+\subsection{Jawaban atas Rumusan Masalah}
+\TemplateTodo{Jawab setiap rumusan masalah Bab I secara berurutan, masing-masing dengan bukti dari subbab hasil di atas.}
+
+\subsection{Perbandingan dengan Penelitian Terdahulu}
+\TemplateTodo{Bandingkan hasil dengan penelitian pada Tabel 2.1. Sebutkan perbedaan data, protokol, dan metrik sebelum membandingkan angka.}
+
+\subsection{Faktor Pembatas Validitas Penelitian}\label{sec:ch4-keterbatasan}
 \TemplateTodo{Tuliskan keterbatasan secara jujur dan spesifik, misalnya keterbatasan data, waktu, perangkat, metode, validasi, atau cakupan pengguna.}

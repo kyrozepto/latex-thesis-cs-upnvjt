@@ -63,6 +63,9 @@ Berkas ini memuat font dan gaya bersama seluruh gambar:
 - **Gaya diagram alur**: `tahap`, `tahapaksen`, `panah`, `panahaksen`, `kelompok`.
 - **Gaya grafik**: `bakuaxis` untuk sumbu, `bakubar` untuk diagram batang.
 - **Pembantu**: `\panellabel{axis}{(a)}` dan `\keteranganbersama{axis1}{axis2}{teks}`.
+- **Grid matriks**: `\gridmat{ukuran sel}{gaya}{{{1,2},{3,4}}}` menggambar matriks bernilai, dan
+  `\window{ukuran sel}{kolom}{baris}{lebar}{gaya garis}` menyorot jendela di atasnya. Gaya sel:
+  `sel`, `selaksen`, `seldua`, `selnol`. Contohnya `example-grid.tex` (konvolusi 3x3).
 
 Ubah `preamble.tex` bila Anda ingin mengganti warna atau tebal garis di semua gambar sekaligus.
 
@@ -72,4 +75,5 @@ Ubah `preamble.tex` bila Anda ingin mengganti warna atau tebal garis di semua ga
   hasil antara dihapus otomatis.
 - PDF hasil render **tidak** diabaikan `.gitignore` — commit saja, supaya orang lain bisa
   membangun naskah tanpa harus menjalankan pipeline ini lebih dahulu.
-- `example-diagram.tex` adalah contoh yang bisa Anda hapus setelah punya gambar sendiri.
+- `example-diagram.tex` dan `example-grid.tex` adalah contoh yang bisa Anda hapus setelah punya
+  gambar sendiri.

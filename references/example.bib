@@ -1,7 +1,36 @@
+% references/example.bib
+% Three entry shapes, one per way IEEEtran-doi.bst prints a reference:
+%   - a book, printed in the usual IEEE book format;
+%   - an article with a doi field, which prints "doi: ..." and no URL;
+%   - a web page with url and urldate, which prints
+%     "Accessed: <urldate>. [Online]. Available: <url>".
+% Replace them with your own references. Keep the doi field whenever the
+% publisher assigns one: it is the most reliable way for a reader to find the
+% source.
+
 @book{exampleReference,
   author    = {Nama Penulis},
   title     = {Judul Buku atau Referensi Ilmiah},
   year      = {2024},
   publisher = {Nama Penerbit},
   address   = {Kota}
+}
+
+@article{exampleArticle,
+  author  = {Penulis Pertama and Penulis Kedua and Penulis Ketiga},
+  title   = {Judul Artikel Jurnal yang Dirujuk},
+  journal = {Nama Jurnal},
+  year    = {2025},
+  volume  = {12},
+  number  = {3},
+  pages   = {101--115},
+  doi     = {10.0000/contoh.doi.2025.001}
+}
+
+@misc{exampleWebsite,
+  author  = {{Nama Lembaga}},
+  title   = {Judul Halaman atau Dokumen Daring},
+  year    = {2026},
+  url     = {https://example.com/dokumen},
+  urldate = {2026-01-15}
 }
